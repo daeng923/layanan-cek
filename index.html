@@ -1,345 +1,192 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cek Rekapan Kehadiran</title>
-
-<style>
-:root{
-  --primary:#0f5132;
-  --bg:#f4f7f6;
-  --text:#333;
-  --muted:#777;
-  --soft:#eef2f1;
-  --danger:#b02a37;
-}
-
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:"Segoe UI", Arial, sans-serif;
-  background:linear-gradient(135deg,#eaf5ef,#f7faf9);
-  padding:28px 14px;
-  color:var(--text);
-}
-
-.container{
-  max-width:520px;
-  margin:auto;
-}
-
-.card{
-  background:#fff;
-  border-radius:18px;
-  box-shadow:0 18px 42px rgba(0,0,0,.12);
-  padding:26px;
-  animation:fadeUp .5s ease;
-}
-
-@keyframes fadeUp{
-  from{opacity:0; transform:translateY(18px)}
-  to{opacity:1; transform:translateY(0)}
-}
-
-.header{
-  text-align:center;
-  margin-bottom:22px;
-}
-
-.header h2{
-  margin:0;
-  font-size:21px;
-  color:var(--primary);
-}
-
-.header p{
-  margin:6px 0 0;
-  font-size:13px;
-  color:var(--muted);
-}
-
-label{
-  display:block;
-  margin-top:14px;
-  font-size:13px;
-  color:var(--muted);
-}
-
-select,input{
-  width:100%;
-  padding:12px 14px;
-  margin-top:6px;
-  border-radius:12px;
-  border:1px solid #ddd;
-  font-size:14px;
-}
-
-select:focus,input:focus{
-  outline:none;
-  border-color:var(--primary);
-}
-
-button{
-  width:100%;
-  margin-top:18px;
-  padding:12px;
-  border:none;
-  border-radius:14px;
-  background:var(--primary);
-  color:#fff;
-  font-size:15px;
-  font-weight:600;
-  cursor:pointer;
-  transition:.3s;
-}
-
-button:hover{opacity:.9}
-
-/* LIST HASIL */
-.list{
-  margin-top:14px;
-  border:1px solid #e0e6e4;
-  border-radius:14px;
-  max-height:240px;
-  overflow:auto;
-  animation:fadeUp .3s ease;
-}
-
-.item{
-  padding:12px 14px;
-  cursor:pointer;
-  border-bottom:1px solid #edf1f0;
-  transition:.2s;
-}
-
-.item:last-child{border-bottom:none}
-
-.item:hover{
-  background:#f1f5f4;
-}
-
-/* HASIL DETAIL */
-.result{
-  margin-top:24px;
-  text-align:center;
-  animation:fadeUp .4s ease;
-}
-
-.avatar{
-  width:120px;
-  height:120px;
-  margin:0 auto 10px;
-  border-radius:50%;
-  object-fit:cover;
-  box-shadow:0 6px 18px rgba(0,0,0,.2);
-}
-
-.name{
-  font-size:16px;
-  font-weight:600;
-  margin-top:6px;
-}
-
-.badge{
-  display:inline-block;
-  margin-top:6px;
-  padding:6px 14px;
-  border-radius:20px;
-  font-size:12px;
-  background:var(--soft);
-  color:var(--primary);
-}
-
-.total{
-  margin-top:14px;
-  font-size:14px;
-}
-
-.total b{
-  font-size:22px;
-  color:var(--primary);
-}
-
-.loading{
-  font-size:13px;
-  color:var(--muted);
-}
-
-.error{
-  margin-top:10px;
-  font-size:14px;
-  color:var(--danger);
-}
-
-/* INFO BOX */
-.info-box{
-  margin-top:20px;
-  padding:14px 16px;
-  border-radius:14px;
-  background:#f1f6f4;
-  border-left:4px solid var(--primary);
-  font-size:13px;
-  color:#2f4f46;
-}
-
-.info-box b{color:var(--primary)}
-
-.footer{
-  margin-top:16px;
-  font-size:11px;
-  color:var(--muted);
-  text-align:center;
-}
-
-/* RESPONSIVE */
-@media (min-width:768px){
-  .container{max-width:560px}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DQLP Dashboard | Premium Experience</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .custom-scroll::-webkit-scrollbar { width: 4px; }
+    .custom-scroll::-webkit-scrollbar-track { background: #f1f1f1; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fade-in { animation: fadeIn 0.5s ease forwards; }
+  </style>
 </head>
+<body class="text-slate-800 antialiased">
 
-<body>
-
-<div class="container">
-  <div class="card">
-
-    <div class="header">
-      <h2>Cek Rekapan Kehadiran</h2>
-      <p>Pencarian data peserta berdasarkan nama</p>
+  <div class="max-w-md mx-auto min-h-screen pb-12 px-4 pt-8">
+    
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-extrabold tracking-tight text-emerald-900">DQLP <span class="text-emerald-500">UMM</span></h1>
+      <p class="text-slate-500 text-sm mt-1 font-medium">Monitoring Presensi & Pencapaian Sertifikat</p>
     </div>
 
-    <label for="kegiatan">Pilih Kegiatan</label>
-    <select id="kegiatan">
-      <option value="">Memuat kegiatan...</option>
-    </select>
+    <div class="glass-effect rounded-[2rem] shadow-2xl shadow-emerald-200/50 p-6 mb-6">
+      <div class="space-y-4">
+        <div>
+          <label class="text-[11px] font-bold text-slate-400 uppercase tracking-widest ml-1">Program Kegiatan</label>
+          <select id="kegiatan" class="w-full mt-1 bg-slate-50 border border-slate-200 rounded-2xl p-4 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all outline-none appearance-none">
+            <option value="">Memuat program...</option>
+          </select>
+        </div>
 
-    <label for="nama">Nama Peserta</label>
-    <input type="text" id="nama" placeholder="Ketik minimal 3 huruf nama">
+        <div>
+          <label class="text-[11px] font-bold text-slate-400 uppercase tracking-widest ml-1">Pencarian Nama</label>
+          <input type="text" id="nama" placeholder="Ketik minimal 3 huruf..." class="w-full mt-1 bg-slate-50 border border-slate-200 rounded-2xl p-4 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all outline-none">
+        </div>
 
-    <button onclick="cari()">Cari Data</button>
+        <button onclick="cari()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-emerald-200 transition-all active:scale-[0.98]">
+          Cek Rekapan Sekarang
+        </button>
+      </div>
 
-    <div id="list" class="list" style="display:none"></div>
-
-    <div id="hasil" class="result"></div>
-
-    <!-- CATATAN AKUMULASI -->
-    <div class="info-box">
-      <b>Catatan:</b><br>
-      Akumulasi kehadiran ditampilkan berdasarkan <b>kegiatan terdahulu</b>.
-      Data untuk <b>kegiatan yang sedang berjalan</b> akan
-      <b>diperbarui kemudian</b>.
+      <div id="list" class="mt-4 bg-white border border-slate-100 rounded-2xl overflow-hidden hidden shadow-inner"></div>
     </div>
 
-    <!-- INFO KONSULTASI -->
-    <div class="info-box">
-      Jika terdapat kendala atau perbedaan data pada hasil rekapan,
-      silakan <b>konfirmasi langsung</b> ke
-      <b>Kantor AIK dan MKWK UMM Kampus 3</b>.
-    </div>
-
-    <div class="footer">
-      Sistem ini menampilkan data sesuai basis data yang tercatat.
-    </div>
+    <div id="hasil" class="animate-fade-in"></div>
 
   </div>
-</div>
 
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbxoIj0-R-DpcmjqQIW01dekT9CEuRHIyeJmsIZaZqlN6UPO0fnAL9gT0QvAuA5gy5LOiw/exec";
 
-/* LOAD KEGIATAN */
-async function loadKegiatan(){
-  const sel=document.getElementById("kegiatan");
-  try{
-    const res=await fetch(API_URL+"?action=list_kegiatan");
-    const json=await res.json();
-    sel.innerHTML='<option value="">Pilih Kegiatan</option>';
-    json.kegiatan.forEach(k=>{
-      sel.innerHTML+=`<option value="${k}">${k}</option>`;
-    });
-  }catch(e){
-    sel.innerHTML='<option value="">Gagal memuat kegiatan</option>';
-  }
+function toggleAcc(id, el) {
+  const content = document.getElementById(id);
+  const icon = el.querySelector('.acc-icon');
+  content.classList.toggle('hidden');
+  icon.classList.toggle('rotate-180');
 }
 
-/* CARI NAMA */
+async function loadKegiatan(){
+  const sel = document.getElementById("kegiatan");
+  try {
+    const res = await fetch(API_URL + "?action=list_kegiatan");
+    const json = await res.json();
+    sel.innerHTML = '<option value="">Pilih Program</option>';
+    json.kegiatan.forEach(k => sel.innerHTML += `<option value="${k}">${k}</option>`);
+  } catch(e) { sel.innerHTML = '<option value="">Gagal Muat</option>'; }
+}
+
 async function cari(){
-  const nama=document.getElementById("nama").value.trim();
-  const kegiatan=document.getElementById("kegiatan").value;
-  const list=document.getElementById("list");
-  const hasil=document.getElementById("hasil");
-
-  list.style.display="none";
-  list.innerHTML="";
-  hasil.innerHTML="";
-
-  if(!kegiatan || nama.length<3){
-    alert("Pilih kegiatan dan ketik minimal 3 huruf nama");
+  const n = document.getElementById("nama").value.trim();
+  const k = document.getElementById("kegiatan").value;
+  if(!k || n.length < 3) return;
+  const list = document.getElementById("list");
+  list.classList.remove('hidden');
+  list.innerHTML = '<div class="p-4 text-center text-sm text-slate-400 italic">Mencari data...</div>';
+  const res = await fetch(`${API_URL}?action=cari_nama&kegiatan=${encodeURIComponent(k)}&nama=${encodeURIComponent(n)}`);
+  const json = await res.json();
+  list.innerHTML = "";
+  if(json.hasil.length === 0) {
+    list.innerHTML = '<div class="p-4 text-center text-sm text-rose-500 font-medium">Data tidak ditemukan</div>';
     return;
   }
-
-  list.style.display="block";
-  list.innerHTML='<div class="item">Mencari data...</div>';
-
-  const res=await fetch(
-    API_URL+
-    "?action=cari_nama&kegiatan="+encodeURIComponent(kegiatan)+
-    "&nama="+encodeURIComponent(nama)
-  );
-  const json=await res.json();
-
-  list.innerHTML="";
-
-  if(json.hasil.length===0){
-    list.innerHTML='<div class="item">Tidak ada data ditemukan</div>';
-    return;
-  }
-
-  json.hasil.forEach(h=>{
-    const div=document.createElement("div");
-    div.className="item";
-    div.textContent=h.nama;
-    div.onclick=()=>detail(h.kode);
-    list.appendChild(div);
+  json.hasil.forEach(h => {
+    const d = document.createElement("div");
+    d.className = "p-4 border-b border-slate-50 last:border-0 cursor-pointer hover:bg-emerald-50 text-sm font-medium text-slate-600 transition-colors";
+    d.textContent = h.nama;
+    d.onclick = () => detail(h.kode);
+    list.appendChild(d);
   });
 }
 
-/* DETAIL PESERTA */
 async function detail(kode){
-  const kegiatan=document.getElementById("kegiatan").value;
-  const list=document.getElementById("list");
-  const hasil=document.getElementById("hasil");
+  const k = document.getElementById("kegiatan").value;
+  const hasil = document.getElementById("hasil");
+  document.getElementById("list").classList.add('hidden');
+  hasil.innerHTML = '<div class="flex justify-center p-12"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-600"></div></div>';
 
-  list.style.display="none";
-  hasil.innerHTML='<div class="loading">Memuat data...</div>';
+  try {
+    const res = await fetch(`${API_URL}?action=detail&kegiatan=${encodeURIComponent(k)}&kode=${encodeURIComponent(kode)}`);
+    const json = await res.json();
+    
+    const total = parseInt(json.data.total || 0);
+    const sertifikat = Math.floor(total / 10);
+    const sisa = 10 - (total % 10);
 
-  const res=await fetch(
-    API_URL+
-    "?action=detail&kegiatan="+encodeURIComponent(kegiatan)+
-    "&kode="+encodeURIComponent(kode)
-  );
-  const json=await res.json();
+    let html = `
+      <div class="glass-effect rounded-[2rem] shadow-xl p-8 text-center animate-fade-in">
+        ${json.data.foto ? `<img src="${json.data.foto}" class="w-24 h-24 mx-auto rounded-full object-cover ring-4 ring-emerald-50 shadow-lg mb-4">` : ''}
+        <h3 class="text-xl font-extrabold text-slate-800 leading-tight">${json.data.nama}</h3>
+        <p class="text-emerald-600 text-xs font-bold uppercase tracking-widest mt-1">${json.data.skema || ''}</p>
 
-  if(json.status!=="ok"){
-    hasil.innerHTML='<div class="error">Data tidak ditemukan</div>';
-    return;
-  }
+        <div class="mt-8 p-6 bg-gradient-to-br from-emerald-50 to-white rounded-3xl border border-emerald-100 relative overflow-hidden">
+          <div class="text-4xl mb-2">${"🏆".repeat(sertifikat) || "🎯"}</div>
+          <p class="text-emerald-900 font-extrabold text-lg">${sertifikat} Sertifikat Diraih</p>
+          <p class="text-slate-500 text-[11px] mt-1 italic">Total validasi harian: <span class="font-bold text-emerald-600">${total}</span></p>
+          
+          <div class="mt-4 bg-emerald-200/30 rounded-full h-2 w-full overflow-hidden">
+             <div class="bg-emerald-500 h-full rounded-full transition-all duration-1000" style="width: ${((total%10)/10)*100}%"></div>
+          </div>
+          <p class="text-[10px] text-emerald-700 font-bold mt-2 uppercase tracking-tighter">
+            ${sisa === 10 ? 'Capaian 10 baru terpenuhi!' : `Butuh ${sisa} pertemuan lagi untuk piala berikutnya`}
+          </p>
+        </div>
 
-  hasil.innerHTML=`
-    ${json.data.foto?`<img src="${json.data.foto}" class="avatar">`:``}
-    <div class="name">${json.data.nama}</div>
-    <div class="badge">${json.data.ket||"-"}</div>
-    <div class="total">
-      Total Kehadiran<br>
-      <b>${json.data.total}</b>
-    </div>
-  `;
+        <div class="mt-6 border-t border-slate-100 pt-2">
+          <div class="flex justify-between items-center py-4 cursor-pointer group" onclick="toggleAcc('acc-periode', this)">
+            <span class="text-sm font-bold text-slate-700 group-hover:text-emerald-600 transition-colors">Akumulasi per Periode</span>
+            <svg class="acc-icon w-4 h-4 text-slate-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div id="acc-periode" class="hidden pb-4">
+            <div class="grid grid-cols-2 gap-2">
+              ${Object.entries(json.data.rincian_periode).map(([key, val]) => `
+                <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                  <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">${key}</p>
+                  <p class="text-sm font-extrabold text-emerald-800">${val} Hadir</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-slate-100">
+          <div class="flex justify-between items-center py-4 cursor-pointer group" onclick="toggleAcc('acc-online', this)">
+            <span class="text-sm font-bold text-slate-700 group-hover:text-emerald-600 transition-colors">Detail Presensi Online</span>
+            <svg class="acc-icon w-4 h-4 text-slate-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div id="acc-online" class="hidden pb-4">
+            <div class="rounded-2xl border border-slate-100 overflow-hidden">
+              <div class="max-h-60 overflow-y-auto custom-scroll">
+                <table class="w-full text-[11px] text-left">
+                  <thead class="bg-slate-50 text-slate-400 uppercase font-bold sticky top-0">
+                    <tr><th class="p-3">Waktu</th><th class="p-3">Sesi</th><th class="p-3">Status</th></tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-50 text-slate-600">
+                    ${json.riwayat.length > 0 ? json.riwayat.map(r => `
+                      <tr>
+                        <td class="p-3 font-medium">${r.tanggal}</td>
+                        <td class="p-3">${r.periode}</td>
+                        <td class="p-3 ${r.status.toUpperCase()==='VALID'?'text-emerald-600 font-bold':'text-rose-400'}">${r.status}</td>
+                      </tr>
+                    `).join('') : '<tr><td colspan="3" class="p-8 text-center text-slate-400 italic">Belum ada data online</td></tr>'}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 p-4 bg-amber-50 rounded-2xl border border-amber-100 text-left">
+          <p class="text-[10px] text-amber-700 leading-relaxed font-medium">
+            <strong class="text-amber-800">Info Transisi:</strong> Periode 1, 2, dan awal 3 menggunakan manual. Detail harian mulai tersedia sejak pertemuan 13 Periode 3.
+          </p>
+        </div>
+      </div>
+    `;
+    hasil.innerHTML = html;
+  } catch(e) { hasil.innerHTML='<div class="p-8 text-center text-rose-500 font-bold">Terjadi kesalahan teknis. Mohon coba lagi.</div>'; }
 }
-
 loadKegiatan();
 </script>
-
 </body>
 </html>
