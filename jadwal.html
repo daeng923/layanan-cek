@@ -14,6 +14,7 @@
     🔎 Cari Nama Dosen
   </h2>
 
+  <!-- Input -->
   <div>
     <input 
       type="text" 
@@ -23,6 +24,7 @@
     >
   </div>
 
+  <!-- Tombol -->
   <div class="mt-2">
     <button 
       onclick="cariDosen()"
@@ -110,7 +112,6 @@ function tampilkanHasil(data) {
       transform
       hover:-translate-y-1
       active:scale-95
-      animate-pulse
     `;
 
     card.innerHTML = `
@@ -129,11 +130,6 @@ function tampilkanHasil(data) {
       </div>
     `;
 
-    // Hentikan pulse setelah 3 detik agar tidak mengganggu
-    setTimeout(() => {
-      card.classList.remove("animate-pulse");
-    }, 3000);
-
     card.onclick = function() {
 
       document.querySelectorAll("#results > div")
@@ -151,14 +147,15 @@ function tampilkanDetail(item) {
   const detailDiv = document.getElementById("detail");
 
   detailDiv.innerHTML = `
-    <div class="bg-white p-5 rounded-xl shadow-md transition-all duration-300">
+    <div class="bg-white p-5 rounded-xl shadow-md">
       <h3 class="font-semibold text-gray-800 mb-3">Link Kelas</h3>
 
-      <div class="flex flex-wrap gap-2">
+      <div class="flex flex-col gap-3">
+
         ${
           item.linkWA
             ? `<a href="${item.linkWA}" target="_blank"
-                 class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                 class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-center">
                  Gabung Grup WA
                </a>`
             : `<span class="text-sm text-gray-500">Grup WA belum tersedia</span>`
@@ -167,11 +164,16 @@ function tampilkanDetail(item) {
         ${
           item.linkZoom
             ? `<a href="${item.linkZoom}" target="_blank"
-                 class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                 Masuk Zoom
+                 class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-center">
+                 ${
+                   item.roomZoom 
+                   ? `Masuk Zoom ke Room ${item.roomZoom}`
+                   : `Masuk Zoom`
+                 }
                </a>`
             : `<span class="text-sm text-gray-500">Link Zoom belum tersedia</span>`
         }
+
       </div>
 
       <button onclick="resetHasil()"
