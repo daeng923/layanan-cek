@@ -6,30 +6,35 @@
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-50 p-4">
+<body class="bg-gray-50 p-3">
 
-<div class="max-w-md mx-auto bg-transparent">
+<div class="max-w-sm mx-auto bg-transparent">
 
-  <h2 class="text-xl font-bold mb-4 text-gray-800">
-    🔎 Pencarian Jadwal Dosen
+  <h2 class="text-lg font-semibold mb-3 text-gray-800 text-center">
+    🔎 Cek Jadwal
   </h2>
 
-  <div class="flex gap-2">
+  <!-- Input -->
+  <div>
     <input 
       type="text" 
       id="searchInput"
       placeholder="Ketik minimal 3 huruf nama dosen..."
-      class="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
     >
+  </div>
+
+  <!-- Tombol di bawah -->
+  <div class="mt-2">
     <button 
       onclick="cariDosen()"
-      class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+      class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
     >
       Cari
     </button>
   </div>
 
-  <div id="message" class="mt-3 text-sm text-gray-500"></div>
+  <div id="message" class="mt-3 text-sm text-gray-500 text-center"></div>
   <div id="results" class="mt-4 space-y-3"></div>
   <div id="detail" class="mt-6"></div>
 
@@ -135,7 +140,7 @@ function tampilkanDetail(item) {
   const detailDiv = document.getElementById("detail");
 
   detailDiv.innerHTML = `
-    <div class="bg-white p-5 rounded-xl shadow-md animate-fadeIn">
+    <div class="bg-white p-5 rounded-xl shadow-md">
       <h3 class="font-semibold text-gray-800 mb-3">Link Kelas</h3>
 
       <div class="flex flex-wrap gap-2">
@@ -171,6 +176,30 @@ function resetHasil() {
     .forEach(k => k.classList.remove("hidden"));
   document.getElementById("detail").innerHTML = "";
 }
+
+/* ===== PROTEKSI RINGAN ===== */
+
+/* Disable klik kanan */
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+});
+
+/* Disable shortcut developer tools */
+document.addEventListener('keydown', function(e) {
+
+  if (e.key === "F12") {
+    e.preventDefault();
+  }
+
+  if (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "C" || e.key === "J")) {
+    e.preventDefault();
+  }
+
+  if (e.ctrlKey && e.key === "u") {
+    e.preventDefault();
+  }
+
+});
 
 </script>
 
