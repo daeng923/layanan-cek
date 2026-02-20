@@ -14,7 +14,6 @@
     🔎 Cari Nama Dosen
   </h2>
 
-  <!-- Input -->
   <div>
     <input 
       type="text" 
@@ -24,7 +23,6 @@
     >
   </div>
 
-  <!-- Tombol -->
   <div class="mt-2">
     <button 
       onclick="cariDosen()"
@@ -126,7 +124,7 @@ function tampilkanHasil(data) {
       </div>
 
       <div class="mt-2 text-xs text-blue-500 font-medium">
-        👆 Klik untuk melihat link
+        👆 Klik untuk melihat detail
       </div>
     `;
 
@@ -148,7 +146,13 @@ function tampilkanDetail(item) {
 
   detailDiv.innerHTML = `
     <div class="bg-white p-5 rounded-xl shadow-md">
-      <h3 class="font-semibold text-gray-800 mb-3">Link Kelas</h3>
+      <h3 class="font-semibold text-gray-800 mb-3">Detail Kelas</h3>
+
+      <div class="mb-4 text-sm text-gray-700 space-y-1">
+        ${item.hari ? `<div><span class="font-medium">Hari:</span> ${item.hari}</div>` : ``}
+        ${item.jam ? `<div><span class="font-medium">Jam:</span> ${item.jam}</div>` : ``}
+        ${item.ruang ? `<div><span class="font-medium">Ruang:</span> ${item.ruang}</div>` : ``}
+      </div>
 
       <div class="flex flex-col gap-3">
 
@@ -198,17 +202,13 @@ document.addEventListener('contextmenu', function(e) {
 
 document.addEventListener('keydown', function(e) {
 
-  if (e.key === "F12") {
-    e.preventDefault();
-  }
+  if (e.key === "F12") e.preventDefault();
 
-  if (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "C" || e.key === "J")) {
+  if (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "C" || e.key === "J"))
     e.preventDefault();
-  }
 
-  if (e.ctrlKey && e.key === "u") {
+  if (e.ctrlKey && e.key === "u")
     e.preventDefault();
-  }
 
 });
 
