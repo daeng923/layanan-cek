@@ -1308,33 +1308,42 @@ function injectHero(d) {
 function injectAgenda(items) {
   if (!items || items.length === 0) return;
 
-  // Coba selector dari dalam ke luar agar kompatibel
-  // dengan imitasi FE (index.html) dan WordPress asli
-  const container =
-    document.querySelector('#rt-tpg-container-2055913008 .list-layout-wrapper') ||
-    document.querySelector('#rt-tpg-container-2055913008 .rt-content-loader');
-  if (!container) return;
+  // Guard: jangan inject dua kali
+  if (document.querySelector('.aik-cms-agenda-injected')) return;
 
-  const wrapper = document.createElement('div');
-  wrapper.style.cssText = 'width:100%; margin-bottom:20px;';
-  wrapper.innerHTML = '<div><span class="aik-cms-badge">📌 Dari BPP MKWK</span></div>';
+  const layoutWrapper = document.querySelector('#rt-tpg-container-2055913008 .list-layout-wrapper');
+  if (!layoutWrapper) return;
 
+  // Buat section baru di ATAS layout wrapper yang sudah ada
+  const section = document.createElement('div');
+  section.className = 'aik-cms-agenda-injected';
+  section.style.cssText = 'width:100%; margin-bottom:24px; padding-bottom:20px; border-bottom:2px dashed #e0e0e0;';
+
+  // Badge label
+  section.innerHTML = '<div style="margin-bottom:12px;"><span class="aik-cms-badge">📌 Dari BPP MKWK</span></div>';
+
+  // Row flex — ikuti struktur list-layout-wrapper asli
   const row = document.createElement('div');
-  row.style.cssText = 'display:flex; flex-wrap:wrap; gap:14px; margin-top:10px;';
+  row.style.cssText = 'display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap;';
 
   items.forEach((item, i) => {
     const col = document.createElement('div');
-    col.style.cssText = i === 0
-      ? 'flex:0 0 33%;max-width:33%;'
-      : 'flex:0 0 calc(33% - 14px);max-width:calc(33% - 14px);';
+    // Item pertama: lebih lebar (featured), sisanya sama rata
+    if (i === 0) {
+      col.style.cssText = 'flex:0 0 32%; max-width:32%;';
+    } else {
+      const remaining = items.length - 1;
+      const pct = remaining > 0 ? Math.floor((68 / remaining) - 1) : 32;
+      col.style.cssText = `flex:0 0 ${pct}%; max-width:${pct}%;`;
+    }
 
     col.innerHTML = `
-      <div class="rt-holder tpg-post-holder">
+      <div class="rt-holder tpg-post-holder" style="height:100%;">
         <div class="rt-img-holder">
           <a href="${esc(item.link)}">
             <img src="${esc(item.gambar_url)}" alt="${esc(item.judul)}"
-                 style="height:${i===0?'220':'160'}px;object-fit:cover;width:100%;"
-                 onerror="this.src='https://via.placeholder.com/400x200/003d7a/ffffff?text=AIK'">
+                 style="height:${i===0?'210':'160'}px;object-fit:cover;width:100%;"
+                 onerror="this.style.display='none'">
           </a>
         </div>
         <div class="post-right-content">
@@ -1348,9 +1357,10 @@ function injectAgenda(items) {
     row.appendChild(col);
   });
 
-  wrapper.appendChild(row);
-  // prepend: tidak pakai insertBefore agar tidak error jika child beda level
-  container.prepend(wrapper);
+  section.appendChild(row);
+
+  // Insert section AIK SEBELUM layout WordPress (layoutWrapper)
+  layoutWrapper.parentNode.insertBefore(section, layoutWrapper);
 }
 
 function injectQuicklinks(data) {
@@ -1393,18 +1403,31 @@ function injectAikSection(d) {
 
 function injectBerita(items) {
   if (!items || items.length === 0) return;
-  const container = document.querySelector('#rt-tpg-container-1641764275 .rt-content-loader .grid-layout-wrapper');
-  if (!container) return;
+
+  // Guard: jangan inject dua kali
+  if (document.querySelector('.aik-cms-berita-injected')) return;
+
+  const gridWrapper = document.querySelector('#rt-tpg-container-1641764275 .grid-layout-wrapper');
+  if (!gridWrapper) return;
+
+  // Buat section baru di ATAS grid WordPress
+  const section = document.createElement('div');
+  section.className = 'aik-cms-berita-injected';
+  section.style.cssText = 'display:contents;'; // tidak mengganggu CSS grid
 
   items.forEach(item => {
     const col = document.createElement('div');
     col.className = 'rt-col-md-4 default rt-grid-item';
     col.innerHTML = `
-      <div class="rt-holder tpg-post-holder">
+      <div class="rt-holder tpg-post-holder" style="position:relative;">
+        <div style="position:absolute;top:8px;left:8px;z-index:2;">
+          <span class="aik-cms-badge">📌 BPP MKWK</span>
+        </div>
         <div class="rt-img-holder">
           <a href="${esc(item.link)}">
             <img src="${esc(item.gambar_url)}" alt="${esc(item.judul)}"
-                 onerror="this.src='https://via.placeholder.com/400x200/003d7a/ffffff?text=Berita'">
+                 style="height:180px;object-fit:cover;width:100%;"
+                 onerror="this.style.display='none'">
           </a>
         </div>
         <div class="post-right-content">
@@ -1420,8 +1443,11 @@ function injectBerita(items) {
         </div>
       </div>
     `;
-    container.prepend(col);
+    section.appendChild(col);
   });
+
+  // Prepend section ke dalam grid — tampil sebelum berita WordPress
+  gridWrapper.prepend(section);
 }
 
 // Video popup handler
