@@ -170,14 +170,34 @@
       overflow: hidden;
       background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, #1565c0 100%);
     }
+    /* YouTube iframe background */
     .hero-video-bg {
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.18;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      /* Pastikan selalu cover area, aspect ratio 16:9 */
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      /* Untuk iframe: paksa ukuran besar agar cover */
       pointer-events: none;
+      z-index: 0;
+    }
+    .hero-video-bg iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      /* Scale trick: paksa iframe jauh lebih besar dari viewport */
+      width: 100vw;
+      height: 56.25vw; /* 16:9 ratio */
+      min-height: 100%;
+      min-width: 177.78vh; /* 16:9 ratio */
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      border: none;
+      opacity: 0.35;
     }
     .hero-overlay {
       position: absolute;
@@ -735,6 +755,16 @@
      elementor-element-343f794 | widget d541520 | btn 5f6b995
 ============================================================ -->
 <section class="hero-section" data-elementor-id="343f794">
+  <!-- Background video YouTube — autoplay, muted, loop, no controls -->
+  <div class="hero-video-bg" id="heroBgVideo">
+    <iframe
+      id="heroBgIframe"
+      src="https://www.youtube.com/embed/c9AkF4XoHs4?autoplay=1&mute=1&loop=1&playlist=c9AkF4XoHs4&controls=0&showinfo=0&rel=0&disablekb=1&iv_load_policy=3&modestbranding=1&playsinline=1"
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+      title="Hero background video"
+    ></iframe>
+  </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="elementor-element-d541520">
@@ -1263,6 +1293,14 @@ function injectHero(d) {
     if (btn) {
       if (d.btn_url)   btn.href = d.btn_url;
       if (d.btn_label) btn.textContent = d.btn_label;
+    }
+  }
+  // Update background video jika ada video_url dari GAS
+  if (d.video_url) {
+    const ytId = extractYoutubeId(d.video_url);
+    const iframe = document.getElementById('heroBgIframe');
+    if (ytId && iframe) {
+      iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&loop=1&playlist=${ytId}&controls=0&showinfo=0&rel=0&disablekb=1&iv_load_policy=3&modestbranding=1&playsinline=1`;
     }
   }
 }
