@@ -1269,20 +1269,20 @@ function injectHero(d) {
 
 function injectAgenda(items) {
   if (!items || items.length === 0) return;
-  const container = document.querySelector('#rt-tpg-container-2055913008 .rt-content-loader');
+
+  // Coba selector dari dalam ke luar agar kompatibel
+  // dengan imitasi FE (index.html) dan WordPress asli
+  const container =
+    document.querySelector('#rt-tpg-container-2055913008 .list-layout-wrapper') ||
+    document.querySelector('#rt-tpg-container-2055913008 .rt-content-loader');
   if (!container) return;
 
   const wrapper = document.createElement('div');
-  wrapper.className = 'rt-col-xs-12 aik-cms-agenda-wrapper';
   wrapper.style.cssText = 'width:100%; margin-bottom:20px;';
-
-  const label = document.createElement('div');
-  label.innerHTML = '<span class="aik-cms-badge">📌 Dari BPP MKWK</span>';
-  wrapper.appendChild(label);
+  wrapper.innerHTML = '<div><span class="aik-cms-badge">📌 Dari BPP MKWK</span></div>';
 
   const row = document.createElement('div');
-  row.className = 'list-layout-wrapper';
-  row.style.flexWrap = 'wrap';
+  row.style.cssText = 'display:flex; flex-wrap:wrap; gap:14px; margin-top:10px;';
 
   items.forEach((item, i) => {
     const col = document.createElement('div');
@@ -1311,8 +1311,8 @@ function injectAgenda(items) {
   });
 
   wrapper.appendChild(row);
-  const firstChild = container.querySelector('.list-layout-wrapper');
-  container.insertBefore(wrapper, firstChild);
+  // prepend: tidak pakai insertBefore agar tidak error jika child beda level
+  container.prepend(wrapper);
 }
 
 function injectQuicklinks(data) {
@@ -1382,7 +1382,7 @@ function injectBerita(items) {
         </div>
       </div>
     `;
-    container.insertBefore(col, container.firstChild);
+    container.prepend(col);
   });
 }
 
