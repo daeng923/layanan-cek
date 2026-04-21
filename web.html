@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home - AIK Universitas Muhammadiyah Malang</title>
+
+  <!-- Font: Roboto + Poppins (sama seperti site asli) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome (sama seperti site asli) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+  <style>
+    /* ============================================================
+       RESET & BASE — mengikuti hello-elementor theme
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:      #003d7a;   /* biru UMM */
+      --primary-dark: #002a57;
+      --accent:       #e8b800;   /* kuning UMM */
+      --text:         #333333;
+      --text-light:   #666666;
+      --text-muted:   #999999;
+      --border:       #e0e0e0;
+      --bg-light:     #f5f7fa;
+      --bg-section:   #f0f4ff;
+      --white:        #ffffff;
+      --font-main:    'Poppins', sans-serif;
+      --font-body:    'Roboto', sans-serif;
+      --max-width:    1200px;
+      --radius:       6px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.7;
+      background: var(--white);
+    }
+
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { max-width: 100%; display: block; }
+    p { margin-bottom: 0.8rem; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ============================================================
+       HEADER / NAVBAR
+    ============================================================ */
+    .site-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+    .site-logo img { height: 46px; width: auto; }
+
+    /* Nav */
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 4px;
+      align-items: center;
+    }
+    .nav-menu > li { position: relative; }
+    .nav-menu > li > a {
+      display: block;
+      padding: 8px 14px;
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      border-radius: var(--radius);
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .nav-menu > li > a:hover,
+    .nav-menu > li.active > a {
+      background: var(--bg-section);
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .nav-menu > li > a .arrow {
+      font-size: 9px;
+      margin-left: 4px;
+      opacity: 0.6;
+    }
+
+    /* Dropdown */
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      min-width: 210px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-6px);
+      transition: opacity 0.2s, transform 0.2s;
+      z-index: 100;
+    }
+    .nav-menu > li:hover .dropdown {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0);
+    }
+    .dropdown a {
+      display: block;
+      padding: 9px 16px;
+      font-size: 13px;
+      color: var(--text);
+      border-bottom: 1px solid #f0f0f0;
+      transition: background 0.15s, color 0.15s;
+    }
+    .dropdown a:last-child { border-bottom: none; }
+    .dropdown a:hover {
+      background: var(--bg-section);
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    /* Hamburger mobile */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ============================================================
+       HERO SECTION
+       data-elementor-id="343f794" — video background + heading
+    ============================================================ */
+    .hero-section {
+      position: relative;
+      min-height: 480px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, #1565c0 100%);
+    }
+    .hero-video-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.18;
+      pointer-events: none;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        rgba(0,42,87,0.82) 0%,
+        rgba(0,61,122,0.70) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 64px 20px;
+      max-width: 680px;
+    }
+    /* ID Elementor widget: d541520 */
+    .elementor-element-d541520 .elementskit-section-title {
+      font-family: var(--font-main);
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+    .hero-divider {
+      width: 48px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin: 14px 0;
+    }
+    .elementor-element-d541520 .elementskit-section-subtitle {
+      font-family: var(--font-main);
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 16px;
+      border-left: 3px solid var(--accent);
+      padding-left: 10px;
+    }
+    .elementor-element-d541520 .ekit-heading__description p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.80);
+      line-height: 1.75;
+      margin-bottom: 0;
+    }
+    /* Tombol hero: elementor-element-5f6b995 */
+    .elementor-element-5f6b995 {
+      margin-top: 28px;
+    }
+    .elementor-element-5f6b995 .elementskit-btn {
+      display: inline-block;
+      padding: 11px 26px;
+      background: var(--accent);
+      color: var(--primary-dark);
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--radius);
+      transition: background 0.2s, transform 0.15s;
+      cursor: pointer;
+      border: none;
+    }
+    .elementor-element-5f6b995 .elementskit-btn:hover {
+      background: #d4a800;
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    /* ============================================================
+       SECTION WRAPPER
+    ============================================================ */
+    .section-boxed {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 48px 20px;
+    }
+
+    /* ============================================================
+       SECTION HEADING (gaya TPG)
+    ============================================================ */
+    .tpg-widget-heading-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .tpg-widget-heading-line {
+      flex: 1;
+      height: 2px;
+      background: var(--border);
+    }
+    .tpg-widget-heading {
+      font-family: var(--font-main);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+    .tpg-widget-heading a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .external-link {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--primary);
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .external-link:hover { text-decoration: underline; }
+
+    /* ============================================================
+       AGENDA & PENGUMUMAN
+       #rt-tpg-container-2055913008
+    ============================================================ */
+    .agenda-section { background: var(--white); }
+    .agenda-section .section-boxed { padding-bottom: 40px; }
+
+    /* Layout: 1 card besar kiri + grid kanan */
+    .list-layout-wrapper {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .offset-left  { flex: 0 0 33%; max-width: 33%; }
+    .offset-right { flex: 1; }
+
+    /* Card besar (featured) */
+    .tpg-post-holder {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+      height: 100%;
+    }
+    .tpg-post-holder:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+      transform: translateY(-2px);
+    }
+    .rt-img-holder { overflow: hidden; }
+    .rt-img-holder img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .offset-left .rt-img-holder img { height: 220px; }
+    .tpg-post-holder:hover .rt-img-holder img { transform: scale(1.04); }
+
+    .post-right-content { padding: 14px 16px; }
+    .entry-title {
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.45;
+      margin-bottom: 8px;
+    }
+    .entry-title a {
+      color: var(--text);
+      transition: color 0.2s;
+    }
+    .entry-title a:hover { color: var(--primary); text-decoration: none; }
+    .post-meta-tags { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+    .post-meta-tags i { margin-right: 4px; }
+    .post-meta-tags a { color: var(--text-muted); }
+    .tpg-excerpt { font-size: 12px; color: var(--text-light); line-height: 1.55; margin-bottom: 10px; }
+    .read-more a {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .read-more a:hover { text-decoration: underline; }
+
+    /* Grid kanan: 2 kolom */
+    .rt-row { display: flex; flex-wrap: wrap; gap: 14px; }
+    .rt-col-md-6 { flex: 0 0 calc(50% - 7px); max-width: calc(50% - 7px); }
+
+    /* ============================================================
+       QUICK LINKS (Akademik, Pembinaan, Layanan)
+       elementor-element-f8a040a
+    ============================================================ */
+    .quicklinks-section { background: var(--bg-light); }
+    .quicklinks-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .quicklinks-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .quicklinks-card-header {
+      background: var(--primary);
+      padding: 14px 18px;
+    }
+    .quicklinks-card-header h2 {
+      font-family: var(--font-main);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+      margin: 0;
+    }
+    .quicklinks-card-body { padding: 14px 18px; }
+    /* ID target: elementor-element-017d55d / a382dc8 / 6c1fb9d */
+    .elementor-element-017d55d p,
+    .elementor-element-a382dc8 p,
+    .elementor-element-6c1fb9d p {
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+    .elementor-element-017d55d a,
+    .elementor-element-a382dc8 a,
+    .elementor-element-6c1fb9d a {
+      color: var(--primary);
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .elementor-element-017d55d a:hover,
+    .elementor-element-a382dc8 a:hover,
+    .elementor-element-6c1fb9d a:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+    .ql-img-wrapper img { width: 100%; }
+
+    /* ============================================================
+       AIK SECTION (Al Islam & Kemuhammadiyahan)
+       elementor-element-4a7ea5b3
+    ============================================================ */
+    .aik-section {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+    }
+    .aik-section .section-boxed {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    /* ID: elementor-element-3d9b519a */
+    .elementor-element-3d9b519a .elementskit-section-subtitle {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--primary);
+      border-left: 3px solid var(--accent);
+      padding-left: 10px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .elementor-element-3d9b519a .elementskit-section-title {
+      font-family: var(--font-main);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+    /* ID: elementor-element-7d8926c6 */
+    .elementor-element-7d8926c6 .elementor-widget-container {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.75;
+    }
+    /* Video popup: elementor-element-236d0678 */
+    .elementor-element-236d0678 { position: relative; }
+    .video-thumb-wrapper {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--primary-dark);
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-thumb-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,42,87,0.6), rgba(0,61,122,0.4));
+    }
+    .ekit-video-popup {
+      position: absolute;
+      z-index: 2;
+      width: 64px;
+      height: 64px;
+      background: rgba(255,255,255,0.92);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: var(--primary);
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .ekit-video-popup:hover {
+      transform: scale(1.1);
+      background: var(--white);
+      text-decoration: none;
+    }
+    .video-thumb-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ============================================================
+       BERITA & ARTIKEL
+       #rt-tpg-container-1641764275
+    ============================================================ */
+    .berita-section { background: var(--bg-light); }
+    .grid-layout-wrapper {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .tpg-separate-category {
+      margin-bottom: 8px;
+    }
+    .categories-links a {
+      display: inline-block;
+      padding: 3px 8px;
+      background: var(--primary);
+      color: var(--white);
+      font-size: 10px;
+      font-weight: 600;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      text-decoration: none;
+    }
+    .categories-links a:hover {
+      background: var(--primary-dark);
+      text-decoration: none;
+    }
+    .berita-section .rt-img-holder img { height: 180px; }
+
+    /* ============================================================
+       FOOTER
+       elementor-element-1790
+    ============================================================ */
+    .site-footer {
+      background: var(--primary-dark);
+      padding: 28px 20px;
+    }
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .social-icons {
+      display: flex;
+      gap: 10px;
+    }
+    .social-icons a {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+    .social-icons a:hover { background: rgba(255,255,255,0.25); text-decoration: none; }
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      font-family: var(--font-main);
+    }
+
+    /* ============================================================
+       WHATSAPP BUTTON (qlwapp)
+    ============================================================ */
+    .wa-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 56px;
+      height: 56px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 26px;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.45);
+      z-index: 999;
+      transition: transform 0.2s;
+      text-decoration: none;
+    }
+    .wa-btn:hover { transform: scale(1.08); text-decoration: none; }
+
+    /* ============================================================
+       AIK CMS BADGE — penanda konten dari Spreadsheet
+    ============================================================ */
+    .aik-cms-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #fff;
+      background: #e65100;
+      padding: 2px 7px;
+      border-radius: 3px;
+      margin-bottom: 10px;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1024px) {
+      .quicklinks-grid { grid-template-columns: repeat(2, 1fr); }
+      .grid-layout-wrapper { grid-template-columns: repeat(2, 1fr); }
+      .aik-section .section-boxed { grid-template-columns: 1fr; gap: 28px; }
+    }
+    @media (max-width: 768px) {
+      .nav-menu { display: none; }
+      .nav-menu.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        border-top: 1px solid var(--border);
+        padding: 12px 0;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      }
+      .nav-menu.open > li > a { padding: 10px 20px; }
+      .nav-menu.open .dropdown {
+        position: static;
+        opacity: 1;
+        pointer-events: all;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        background: var(--bg-light);
+        margin-left: 16px;
+        border-radius: 0;
+      }
+      .hamburger { display: flex; }
+      .site-header { position: relative; }
+
+      .elementor-element-d541520 .elementskit-section-title { font-size: 28px; }
+      .list-layout-wrapper { flex-direction: column; }
+      .offset-left, .offset-right { flex: 0 0 100%; max-width: 100%; }
+      .rt-col-md-6 { flex: 0 0 100%; max-width: 100%; }
+      .quicklinks-grid { grid-template-columns: 1fr; }
+      .grid-layout-wrapper { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="site-logo">
+      <!-- Logo UMM — mengikuti src asli -->
+      <img
+        src="https://aik.umm.ac.id/wp-content/uploads/2024/11/Logo-UMM.png"
+        alt="AIK UMM"
+        onerror="this.src='https://via.placeholder.com/200x46/003d7a/ffffff?text=AIK+UMM'"
+      />
+    </a>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav>
+      <ul class="nav-menu" id="navMenu">
+        <li>
+          <a href="https://aik.umm.ac.id/profil/">Profil <span class="arrow">▾</span></a>
+          <div class="dropdown">
+            <a href="https://aik.umm.ac.id/profil/sejarah/">Sejarah</a>
+            <a href="https://aik.umm.ac.id/profil/visi-dan-misi/">Visi dan Misi</a>
+            <a href="https://aik.umm.ac.id/profil/struktur-organisasi-baa/">Struktur Organisasi BAA</a>
+            <a href="https://aik.umm.ac.id/profil/profil-aik-umm/">Profil AIK UMM</a>
+          </div>
+        </li>
+        <li>
+          <a href="https://aik.umm.ac.id/referensi/">Referensi <span class="arrow">▾</span></a>
+          <div class="dropdown">
+            <a href="https://aik.umm.ac.id/referensi/koleksi-buku-aik/">Koleksi Buku AIK</a>
+            <a href="https://aik.umm.ac.id/referensi/pedoman-pendidikan-aik-ptm/">Pedoman Pendidikan AIK PTM</a>
+            <a href="https://aik.umm.ac.id/referensi/buku-panduan-aik/">Buku Panduan AIK</a>
+            <a href="https://aik.umm.ac.id/referensi/jadwal-waktu-sholat-2026/">Jadwal Waktu Sholat 2026</a>
+          </div>
+        </li>
+        <li>
+          <a href="https://aik.umm.ac.id/akademik/">Akademik <span class="arrow">▾</span></a>
+          <div class="dropdown">
+            <a href="https://aik.umm.ac.id/akademik/panduan-krs/">Panduan KRS</a>
+            <a href="https://aik.umm.ac.id/akademik/jadwal-kuliah/">Jadwal Kuliah</a>
+            <a href="https://aik.umm.ac.id/akademik/ujian-semester/">Ujian Semester</a>
+            <a href="https://aik.umm.ac.id/akademik/nilai-p2kk/">Nilai P2KK</a>
+            <a href="#">Kuliah Semester Antara (KSA)</a>
+          </div>
+        </li>
+        <li>
+          <a href="https://aik.umm.ac.id/non-reguler/">Kegiatan Pendukung <span class="arrow">▾</span></a>
+          <div class="dropdown">
+            <a href="https://aik.umm.ac.id/non-reguler/slq/">Semarak Literasi Qur'an (SLQ)</a>
+            <a href="https://aik.umm.ac.id/non-reguler/kss/">Kuliah Sabtu Subuh (KSS)</a>
+            <a href="https://aik.umm.ac.id/non-reguler/kamisya/">KAMISYA</a>
+            <a href="https://aik.umm.ac.id/non-reguler/ksp/">Kuliah Sabtu Pagi (KSP)</a>
+          </div>
+        </li>
+        <li>
+          <a href="https://aik.umm.ac.id/administrasi-akademik/">Administrasi <span class="arrow">▾</span></a>
+          <div class="dropdown">
+            <a href="https://aik.umm.ac.id/administrasi-akademik/peminjaman-aula-masjid-ar-fachruddin/">Peminjaman Aula Masjid AR-Fachruddin</a>
+            <a href="https://aik.umm.ac.id/administrasi-akademik/layanan-pengajuan-surat/">Layanan Pengajuan Surat</a>
+            <a href="https://aik.umm.ac.id/administrasi-akademik/cek-akumulasi-kehadiran/">Cek Akumulasi Kehadiran</a>
+          </div>
+        </li>
+        <li><a href="https://aik.umm.ac.id/hubungi-kami/">Hubungi Kami</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO SECTION
+     elementor-element-343f794 | widget d541520 | btn 5f6b995
+============================================================ -->
+<section class="hero-section" data-elementor-id="343f794">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="elementor-element-d541520">
+      <h2 class="elementskit-section-title">BPP MKWK</h2>
+      <div class="hero-divider"></div>
+      <h3 class="elementskit-section-subtitle">Universitas Muhammadiyah Malang</h3>
+      <div class="ekit-heading__description">
+        <p><strong>Biro Pendidikan &amp; Pengajaran (BPP) Mata Kuliah Wajib dalam Kurikulum (MKWK)</strong> bertanggung jawab untuk memastikan bahwa setiap mata kuliah wajib yang terkait dengan AIK dan wawasan kebangsaan (Pancasila, Kewarganegaraan, dan Bahasa Indonesia) dapat diajarkan sesuai dengan standar akademik PTM/A yang berlaku, berbasis core values AIK; Ikhlâs, Ihsân, Itqân, Ma'iyyah, Amânah, Nazâhah (IIIMAN).</p>
+      </div>
+    </div>
+    <div class="elementor-element-5f6b995">
+      <a href="https://aik.umm.ac.id/profil/" class="elementskit-btn">Profil Selengkapnya</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     AGENDA & PENGUMUMAN
+     #rt-tpg-container-2055913008
+============================================================ -->
+<div class="agenda-section">
+  <div class="section-boxed">
+    <div class="tpg-widget-heading-wrapper">
+      <span class="tpg-widget-heading-line line-left"></span>
+      <h2 class="tpg-widget-heading">
+        <a href="https://aik.umm.ac.id/agenda-pengumuman/">Agenda &amp; Pengumuman</a>
+      </h2>
+      <span class="tpg-widget-heading-line line-right"></span>
+      <a class="external-link" href="https://aik.umm.ac.id/agenda-pengumuman/">
+        <span>Selengkapnya</span>
+        <i class="fas fa-angle-right"></i>
+      </a>
+    </div>
+
+    <!-- rt-content-loader: titik inject CMS agenda -->
+    <div id="rt-tpg-container-2055913008">
+      <div class="rt-content-loader list-layout2">
+        <div class="list-layout-wrapper">
+
+          <!-- OFFSET LEFT: card featured -->
+          <div class="offset-left">
+            <div class="rt-holder tpg-post-holder">
+              <div class="rt-img-holder">
+                <a href="https://aik.umm.ac.id/pengumuman-rekam-ulang-fingerprint-error-2026/">
+                  <img src="https://aik.umm.ac.id/wp-content/uploads/2026/04/Rekam-Ulang-Fingerprint-web-768x648.jpg"
+                       alt="Rekam Ulang Fingerprint"
+                       onerror="this.src='https://via.placeholder.com/400x220/003d7a/ffffff?text=Agenda'" />
+                </a>
+              </div>
+              <div class="post-right-content">
+                <div class="entry-title-wrapper">
+                  <h3 class="entry-title">
+                    <a href="https://aik.umm.ac.id/pengumuman-rekam-ulang-fingerprint-error-2026/">
+                      PENGUMUMAN : Rekam Ulang Fingerprint Error 2026
+                    </a>
+                  </h3>
+                </div>
+                <div class="post-meta-tags">
+                  <span class="date">
+                    <i class="far fa-calendar-alt"></i>
+                    <a href="#">April 19, 2026</a>
+                  </span>
+                </div>
+                <div class="tpg-excerpt">
+                  Pastikan Presensi Kajian dan Shalat Anda Aman! Halo Mahasiswa UMM! Untuk menjamin kelancaran...
+                </div>
+                <div class="post-footer">
+                  <div class="read-more">
+                    <a href="https://aik.umm.ac.id/pengumuman-rekam-ulang-fingerprint-error-2026/">Baca Selengkapnya</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- OFFSET RIGHT: grid 2 kolom -->
+          <div class="offset-right">
+            <div class="rt-row">
+
+              <div class="rt-col-md-6">
+                <div class="rt-holder tpg-post-holder">
+                  <div class="rt-img-holder">
+                    <a href="https://aik.umm.ac.id/pengumuman-jadwal-ujian-tengah-semester-uts-genap-ta-2025-2026/">
+                      <img src="https://aik.umm.ac.id/wp-content/uploads/2026/04/Ujian-Web-768x648.jpg"
+                           alt="UTS"
+                           onerror="this.src='https://via.placeholder.com/300x180/003d7a/ffffff?text=UTS'" />
+                    </a>
+                  </div>
+                  <div class="post-right-content">
+                    <h3 class="entry-title">
+                      <a href="https://aik.umm.ac.id/pengumuman-jadwal-ujian-tengah-semester-uts-genap-ta-2025-2026/">
+                        Pengumuman Jadwal UTS Genap TA 2025/2026
+                      </a>
+                    </h3>
+                    <div class="post-meta-tags">
+                      <i class="far fa-calendar-alt"></i>
+                      <a href="#">April 19, 2026</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="rt-col-md-6">
+                <div class="rt-holder tpg-post-holder">
+                  <div class="rt-img-holder">
+                    <a href="https://aik.umm.ac.id/koordinasi-akademik-dosen-pembina-aik-mkwk/">
+                      <img src="https://aik.umm.ac.id/wp-content/uploads/2026/02/Web-Upload-768x432.jpg"
+                           alt="Koordinasi"
+                           onerror="this.src='https://via.placeholder.com/300x180/003d7a/ffffff?text=Koordinasi'" />
+                    </a>
+                  </div>
+                  <div class="post-right-content">
+                    <h3 class="entry-title">
+                      <a href="https://aik.umm.ac.id/koordinasi-akademik-dosen-pembina-aik-mkwk/">
+                        Koordinasi Akademik Dosen Pembina AIK &amp; MKWK
+                      </a>
+                    </h3>
+                    <div class="post-meta-tags">
+                      <i class="far fa-calendar-alt"></i>
+                      <a href="#">February 19, 2026</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="rt-col-md-6">
+                <div class="rt-holder tpg-post-holder">
+                  <div class="rt-img-holder">
+                    <a href="https://aik.umm.ac.id/war-krs-dimulai-amankan-jadwal-estetikmu-sekarang/">
+                      <img src="https://aik.umm.ac.id/wp-content/uploads/2026/02/Panduan-KRS-web-v2-768x768.jpg"
+                           alt="KRS"
+                           onerror="this.src='https://via.placeholder.com/300x180/003d7a/ffffff?text=KRS'" />
+                    </a>
+                  </div>
+                  <div class="post-right-content">
+                    <h3 class="entry-title">
+                      <a href="https://aik.umm.ac.id/war-krs-dimulai-amankan-jadwal-estetikmu-sekarang/">
+                        War KRS Dimulai! Amankan Jadwal Estetikmu Sekarang!
+                      </a>
+                    </h3>
+                    <div class="post-meta-tags">
+                      <i class="far fa-calendar-alt"></i>
+                      <a href="#">February 3, 2026</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="rt-col-md-6">
+                <div class="rt-holder tpg-post-holder">
+                  <div class="rt-img-holder">
+                    <a href="https://aik.umm.ac.id/format-baru-wajib-non-reguler-aik-umm/">
+                      <img src="https://aik.umm.ac.id/wp-content/uploads/2025/11/KSP-WEB-768x768.jpg"
+                           alt="Format Baru"
+                           onerror="this.src='https://via.placeholder.com/300x180/003d7a/ffffff?text=Info'" />
+                    </a>
+                  </div>
+                  <div class="post-right-content">
+                    <h3 class="entry-title">
+                      <a href="https://aik.umm.ac.id/format-baru-wajib-non-reguler-aik-umm/">
+                        Format Baru Wajib Non-Reguler AIK UMM!
+                      </a>
+                    </h3>
+                    <div class="post-meta-tags">
+                      <i class="far fa-calendar-alt"></i>
+                      <a href="#">November 27, 2025</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /.rt-row -->
+          </div><!-- /.offset-right -->
+
+        </div><!-- /.list-layout-wrapper -->
+      </div><!-- /.rt-content-loader -->
+    </div><!-- /#rt-tpg-container-2055913008 -->
+  </div>
+</div>
+
+<!-- ============================================================
+     QUICK LINKS
+     elementor-element-f8a040a
+============================================================ -->
+<div class="quicklinks-section">
+  <div class="section-boxed">
+    <div class="quicklinks-grid">
+
+      <!-- Kegiatan Akademik -->
+      <div class="quicklinks-card">
+        <div class="quicklinks-card-header">
+          <h2>Kegiatan Akademik</h2>
+        </div>
+        <div class="quicklinks-card-body elementor-element-017d55d">
+          <div class="elementor-widget-container">
+            <p>👉🏼 <a href="/akademik/panduan-krs/">Panduan KRS</a></p>
+            <p>👉🏼 <a href="https://aik.umm.ac.id/akademik/jadwal-kuliah/">Jadwal Kuliah</a></p>
+            <p>👉🏼 <a href="https://aik.umm.ac.id/akademik/ujian-semester/">Menu Ujian</a></p>
+            <p>👉🏼 <a href="#">Kuliah Semester Antara</a></p>
+            <p>👉🏼 <a href="https://aik.umm.ac.id/akademik/nilai-p2kk/">P2KK</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kegiatan Pembinaan AIK -->
+      <div class="quicklinks-card">
+        <div class="quicklinks-card-header">
+          <h2>Kegiatan Pembinaan AIK</h2>
+        </div>
+        <div class="quicklinks-card-body elementor-element-a382dc8">
+          <div class="elementor-widget-container">
+            <p>👉🏼 <a href="/non-reguler/slq/">Semarak Literasi Quran</a></p>
+            <p>👉🏼 <a href="https://aik.umm.ac.id/kegiatan-pendukung-program-non-reguler/kuliah-sabtu-subuh-kss/">Kuliah Sabtu Subuh</a></p>
+            <p>👉🏼 <a href="https://aik.umm.ac.id/kegiatan-pendukung-program-non-reguler/studium-generale/">Studium Generale</a></p>
+            <p>👉🏼 <a href="https://aik.umm.ac.id/kegiatan-pendukung-program-non-reguler/kamisya/">Kamisya</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layanan -->
+      <div class="quicklinks-card">
+        <div class="quicklinks-card-header">
+          <h2>Layanan</h2>
+        </div>
+        <div class="quicklinks-card-body elementor-element-6c1fb9d">
+          <div class="elementor-widget-container">
+            <p>👉🏼 <a href="https://aik.umm.ac.id/administrasi-akademik/layanan-pengajuan-surat/">Administrasi</a></p>
+            <p>👉🏼 <a href="https://aik.umm.ac.id/administrasi-akademik/peminjaman-aula-masjid-ar-fachruddin/">Peminjaman Aula</a></p>
+            <p>👉🏼 <a href="https://aik.umm.ac.id/hubungi-kami/">Hubungi Kami</a></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     AIK SECTION
+     elementor-element-4a7ea5b3
+============================================================ -->
+<section class="aik-section">
+  <div class="section-boxed">
+
+    <!-- Kolom kiri: teks -->
+    <div>
+      <div class="elementor-element-3d9b519a">
+        <span class="elementskit-section-subtitle">Universitas Muhammadiyah Malang (UMM)</span>
+        <h2 class="elementskit-section-title">Al Islam &amp; Kemuhammadiyahan</h2>
+      </div>
+      <div class="elementor-element-7d8926c6">
+        <div class="elementor-widget-container">
+          <p>Al-Islam dan Kemuhammadiyahan (AIK) merupakan basis ideologis dan tatanan nilai yang menjadi ruh setiap aktivitas akademik dan non akademik di Perguruan Tinggi Muhammadiyah / 'Aisyiyah (PTMA), termasuk di Universitas Muhammadiyah Malang (UMM).</p>
+          <p>Al-Islam dan Kemuhammadiyahan (AIK) merupakan basis ideologis dan tatanan nilai yang menjadi ruh setiap aktivitas akademik dan non akademik di Perguruan Tinggi Muhammadiyah / 'Aisyiyah (PTMA), termasuk di Universitas Muhammadiyah Malang (UMM).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kolom kanan: video popup -->
+    <div class="elementor-element-236d0678">
+      <div class="video-thumb-wrapper" id="videoWrapper">
+        <img
+          src="https://img.youtube.com/vi/zQT3gx95NzM/hqdefault.jpg"
+          alt="Video AIK UMM"
+          style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"
+          onerror="this.style.display='none'"
+        />
+        <a class="ekit-video-popup" href="https://www.youtube.com/embed/zQT3gx95NzM?autoplay=1"
+           id="videoPlayBtn" aria-label="Play video">
+          <i class="icon-play fas fa-play" style="margin-left:3px;"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     BERITA & ARTIKEL
+     #rt-tpg-container-1641764275
+============================================================ -->
+<div class="berita-section">
+  <div class="section-boxed">
+    <div class="tpg-widget-heading-wrapper">
+      <span class="tpg-widget-heading-line line-left"></span>
+      <h2 class="tpg-widget-heading">
+        <a href="https://aik.umm.ac.id/berita-artikel/">Berita &amp; Artikel</a>
+      </h2>
+      <span class="tpg-widget-heading-line line-right"></span>
+      <a class="external-link" href="https://aik.umm.ac.id/berita-artikel/">
+        <span>Selengkapnya</span>
+        <i class="fas fa-angle-right"></i>
+      </a>
+    </div>
+
+    <div id="rt-tpg-container-1641764275">
+      <div class="rt-content-loader grid-layout4">
+        <div class="grid-layout-wrapper">
+
+          <div class="rt-col-md-4 default rt-grid-item">
+            <div class="rt-holder tpg-post-holder">
+              <div class="rt-img-holder">
+                <a href="https://aik.umm.ac.id/kuliah-sabtu-pagi-umm-ajak-mahasiswa-bangun-kepedulian-terhadap-lansia/">
+                  <img src="https://aik.umm.ac.id/wp-content/uploads/2025/12/dr.-Sunarti-1-768x576.jpeg"
+                       alt="KSP Lansia"
+                       onerror="this.src='https://via.placeholder.com/400x200/003d7a/ffffff?text=Berita'" />
+                </a>
+              </div>
+              <div class="post-right-content">
+                <div class="entry-title-wrapper">
+                  <div class="tpg-separate-category">
+                    <span class="categories-links">
+                      <a href="https://aik.umm.ac.id/category/berita-artikel/">Berita &amp; Artikel</a>
+                    </span>
+                  </div>
+                  <h3 class="entry-title">
+                    <a href="https://aik.umm.ac.id/kuliah-sabtu-pagi-umm-ajak-mahasiswa-bangun-kepedulian-terhadap-lansia/">
+                      Kuliah Sabtu Pagi UMM Ajak Mahasiswa Bangun Kepedulian terhadap Lansia
+                    </a>
+                  </h3>
+                </div>
+                <div class="post-meta-tags">
+                  <i class="far fa-calendar-alt"></i>
+                  <a href="#">December 25, 2025</a>
+                </div>
+                <div class="tpg-excerpt">Kuliah Sabtu Pagi (KSP) pekan terakhir digelar pada Sabtu, 20 Desember 2025. Kegiatan ini diawali...</div>
+                <div class="post-footer"><div class="read-more"><a href="#">Baca Selengkapnya</a></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rt-col-md-4 default rt-grid-item">
+            <div class="rt-holder tpg-post-holder">
+              <div class="rt-img-holder">
+                <a href="https://aik.umm.ac.id/kuliah-sabtu-pagi-bahas-kepemimpinan-berkemajuan-dan-integritas-gen-z-di-ruang-sosial/">
+                  <img src="https://aik.umm.ac.id/wp-content/uploads/2025/12/pak-wahyudi-1-768x576.jpeg"
+                       alt="KSP Gen Z"
+                       onerror="this.src='https://via.placeholder.com/400x200/003d7a/ffffff?text=Berita'" />
+                </a>
+              </div>
+              <div class="post-right-content">
+                <div class="entry-title-wrapper">
+                  <div class="tpg-separate-category">
+                    <span class="categories-links">
+                      <a href="https://aik.umm.ac.id/category/berita-artikel/">Berita &amp; Artikel</a>
+                    </span>
+                  </div>
+                  <h3 class="entry-title">
+                    <a href="https://aik.umm.ac.id/kuliah-sabtu-pagi-bahas-kepemimpinan-berkemajuan-dan-integritas-gen-z-di-ruang-sosial/">
+                      Kuliah Sabtu Pagi Bahas Kepemimpinan Berkemajuan dan Integritas Gen Z
+                    </a>
+                  </h3>
+                </div>
+                <div class="post-meta-tags">
+                  <i class="far fa-calendar-alt"></i>
+                  <a href="#">December 16, 2025</a>
+                </div>
+                <div class="tpg-excerpt">Kuliah Sabtu Pagi (KSP) pekan ketiga kembali digelar pada Sabtu, 13 Desember 2025. Kegiatan ini...</div>
+                <div class="post-footer"><div class="read-more"><a href="#">Baca Selengkapnya</a></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rt-col-md-4 default rt-grid-item">
+            <div class="rt-holder tpg-post-holder">
+              <div class="rt-img-holder">
+                <a href="https://aik.umm.ac.id/pangan-halalan-tayyiban-dan-tanggung-jawab-mahasiswa-menjaga-amanah-tubuh/">
+                  <img src="https://aik.umm.ac.id/wp-content/uploads/2025/12/Prof.-Warkoyo-1-e1765786875822-768x630.jpeg"
+                       alt="Pangan Halal"
+                       onerror="this.src='https://via.placeholder.com/400x200/003d7a/ffffff?text=Berita'" />
+                </a>
+              </div>
+              <div class="post-right-content">
+                <div class="entry-title-wrapper">
+                  <div class="tpg-separate-category">
+                    <span class="categories-links">
+                      <a href="https://aik.umm.ac.id/category/berita-artikel/">Berita &amp; Artikel</a>
+                    </span>
+                  </div>
+                  <h3 class="entry-title">
+                    <a href="https://aik.umm.ac.id/pangan-halalan-tayyiban-dan-tanggung-jawab-mahasiswa-menjaga-amanah-tubuh/">
+                      Pangan Halalan Tayyiban dan Tanggung Jawab Mahasiswa Menjaga Amanah Tubuh
+                    </a>
+                  </h3>
+                </div>
+                <div class="post-meta-tags">
+                  <i class="far fa-calendar-alt"></i>
+                  <a href="#">December 10, 2025</a>
+                </div>
+                <div class="tpg-excerpt">Tren konsumsi generasi Z saat ini menunjukkan kecenderungan pada pola makan praktis dan instan...</div>
+                <div class="post-footer"><div class="read-more"><a href="#">Baca Selengkapnya</a></div></div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /.grid-layout-wrapper -->
+      </div><!-- /.rt-content-loader -->
+    </div><!-- /#rt-tpg-container-1641764275 -->
+  </div>
+</div>
+
+<!-- ============================================================
+     FOOTER
+     elementor-element-1790
+============================================================ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="social-icons">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+    </div>
+    <p class="footer-copy">© 2024. All Rights Reserved. Design by BSID UMM</p>
+  </div>
+</footer>
+
+<!-- WhatsApp Button -->
+<a class="wa-btn" href="https://wa.me/62811366856" target="_blank" aria-label="WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- ============================================================
+     INJECTOR TESTING BANNER
+     Tampil di atas halaman saat mode testing aktif
+============================================================ -->
+<div id="cms-test-banner" style="
+  position:fixed; top:0; left:0; right:0; z-index:9999;
+  background:#e65100; color:#fff;
+  font-family:'Poppins',sans-serif; font-size:12px; font-weight:600;
+  padding:7px 16px;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; box-shadow:0 2px 8px rgba(0,0,0,0.2);
+">
+  <span>
+    🧪 <strong>MODE TESTING — AIK CMS Injector</strong>
+    &nbsp;|&nbsp; Ganti <code style="background:rgba(255,255,255,0.2);padding:1px 6px;border-radius:3px;">GAS_URL</code>
+    di bawah lalu klik <strong>Muat dari GAS</strong>
+  </span>
+  <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;">
+    <input id="gasUrlInput" type="text" placeholder="https://script.google.com/macros/s/.../exec"
+      style="width:340px;padding:5px 10px;border:none;border-radius:4px;font-size:12px;color:#333;" />
+    <button onclick="runInjector()" style="
+      padding:5px 14px;background:#fff;color:#e65100;
+      border:none;border-radius:4px;font-weight:700;cursor:pointer;font-size:12px;
+    ">▶ Muat dari GAS</button>
+    <button onclick="document.getElementById('cms-test-banner').style.display='none'" style="
+      padding:5px 10px;background:rgba(255,255,255,0.2);color:#fff;
+      border:none;border-radius:4px;cursor:pointer;font-size:12px;
+    ">✕</button>
+  </div>
+</div>
+<!-- Beri ruang agar header tidak tertutup banner -->
+<style>body { padding-top: 38px; }</style>
+
+<!-- ============================================================
+     CMS INJECTOR SCRIPT
+     (versi testing — sama persis dengan aik-cms-injector.js
+      tapi GAS_URL diisi via input field di atas)
+============================================================ -->
+<script>
+// Jalankan injector dengan URL dari input field (mode testing)
+function runInjector() {
+  const url = document.getElementById('gasUrlInput').value.trim();
+  if (!url) {
+    alert('Masukkan GAS URL terlebih dahulu.');
+    return;
+  }
+  window._GAS_TEST_URL = url;
+  loadCMSData(url);
+}
+
+// Auto-run jika URL sudah di-set di query string: ?gas=https://...
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const gasParam = params.get('gas');
+  if (gasParam) {
+    document.getElementById('gasUrlInput').value = gasParam;
+    loadCMSData(gasParam);
+  }
+})();
+
+function loadCMSData(GAS_URL) {
+  fetch(GAS_URL + '?section=all')
+    .then(r => r.json())
+    .then(data => {
+      const log = [];
+      if (data.hero)        { injectHero(data.hero);               log.push('hero ✓'); }
+      if (data.agenda)      { injectAgenda(data.agenda);           log.push('agenda ✓'); }
+      if (data.quicklinks)  { injectQuicklinks(data.quicklinks);   log.push('quicklinks ✓'); }
+      if (data.aik_section) { injectAikSection(data.aik_section);  log.push('aik_section ✓'); }
+      if (data.berita)      { injectBerita(data.berita);           log.push('berita ✓'); }
+      showToast('✅ CMS Injected: ' + log.join(', '));
+    })
+    .catch(err => {
+      showToast('❌ Gagal: ' + err.message, true);
+      console.error('[AIK CMS TEST]', err);
+    });
+}
+
+function showToast(msg, isError) {
+  const t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = `
+    position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
+    background:${isError ? '#c62828' : '#1b5e20'};color:#fff;
+    padding:10px 20px;border-radius:6px;font-size:13px;font-family:'Poppins',sans-serif;
+    font-weight:600;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,0.2);
+    max-width:90vw;text-align:center;
+  `;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 4000);
+}
+
+// ---- INJECT FUNCTIONS (identik dengan aik-cms-injector.js) ----
+
+function injectHero(d) {
+  if (!d || d.aktif === 'tidak') return;
+  const sel = (s) => document.querySelector(s);
+  if (d.judul)    { const e = sel('.elementor-element-d541520 .elementskit-section-title');    if(e) e.textContent = d.judul; }
+  if (d.subtitle) { const e = sel('.elementor-element-d541520 .elementskit-section-subtitle'); if(e) e.textContent = d.subtitle; }
+  if (d.deskripsi){ const e = sel('.elementor-element-d541520 .ekit-heading__description p'); if(e) e.innerHTML = d.deskripsi; }
+  if (d.btn_url || d.btn_label) {
+    const btn = sel('.elementor-element-5f6b995 .elementskit-btn');
+    if (btn) {
+      if (d.btn_url)   btn.href = d.btn_url;
+      if (d.btn_label) btn.textContent = d.btn_label;
+    }
+  }
+}
+
+function injectAgenda(items) {
+  if (!items || items.length === 0) return;
+  const container = document.querySelector('#rt-tpg-container-2055913008 .rt-content-loader');
+  if (!container) return;
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'rt-col-xs-12 aik-cms-agenda-wrapper';
+  wrapper.style.cssText = 'width:100%; margin-bottom:20px;';
+
+  const label = document.createElement('div');
+  label.innerHTML = '<span class="aik-cms-badge">📌 Dari BPP MKWK</span>';
+  wrapper.appendChild(label);
+
+  const row = document.createElement('div');
+  row.className = 'list-layout-wrapper';
+  row.style.flexWrap = 'wrap';
+
+  items.forEach((item, i) => {
+    const col = document.createElement('div');
+    col.style.cssText = i === 0
+      ? 'flex:0 0 33%;max-width:33%;'
+      : 'flex:0 0 calc(33% - 14px);max-width:calc(33% - 14px);';
+
+    col.innerHTML = `
+      <div class="rt-holder tpg-post-holder">
+        <div class="rt-img-holder">
+          <a href="${esc(item.link)}">
+            <img src="${esc(item.gambar_url)}" alt="${esc(item.judul)}"
+                 style="height:${i===0?'220':'160'}px;object-fit:cover;width:100%;"
+                 onerror="this.src='https://via.placeholder.com/400x200/003d7a/ffffff?text=AIK'">
+          </a>
+        </div>
+        <div class="post-right-content">
+          <h3 class="entry-title"><a href="${esc(item.link)}">${esc(item.judul)}</a></h3>
+          <div class="post-meta-tags"><i class="far fa-calendar-alt"></i> ${esc(item.tanggal)}</div>
+          ${item.excerpt ? `<div class="tpg-excerpt">${esc(item.excerpt)}</div>` : ''}
+          <div class="post-footer"><div class="read-more"><a href="${esc(item.link)}">Baca Selengkapnya</a></div></div>
+        </div>
+      </div>
+    `;
+    row.appendChild(col);
+  });
+
+  wrapper.appendChild(row);
+  const firstChild = container.querySelector('.list-layout-wrapper');
+  container.insertBefore(wrapper, firstChild);
+}
+
+function injectQuicklinks(data) {
+  const map = {
+    akademik:  '.elementor-element-017d55d .elementor-widget-container',
+    pembinaan: '.elementor-element-a382dc8 .elementor-widget-container',
+    layanan:   '.elementor-element-6c1fb9d .elementor-widget-container',
+  };
+  Object.keys(map).forEach(key => {
+    const items = data[key];
+    if (!items || items.length === 0) return;
+    const el = document.querySelector(map[key]);
+    if (!el) return;
+    el.innerHTML = items.map(i => `<p>👉🏼 <a href="${esc(i.url)}">${esc(i.label)}</a></p>`).join('');
+  });
+}
+
+function injectAikSection(d) {
+  if (!d || d.aktif === 'tidak') return;
+  const sel = (s) => document.querySelector(s);
+  if (d.subtitle) { const e = sel('.elementor-element-3d9b519a .elementskit-section-subtitle'); if(e) e.textContent = d.subtitle; }
+  if (d.judul)    { const e = sel('.elementor-element-3d9b519a .elementskit-section-title');    if(e) e.textContent = d.judul; }
+  const tc = sel('.elementor-element-7d8926c6 .elementor-widget-container');
+  if (tc) {
+    let html = '';
+    if (d.paragraf1) html += `<p>${d.paragraf1}</p>`;
+    if (d.paragraf2) html += `<p>${d.paragraf2}</p>`;
+    if (html) tc.innerHTML = html;
+  }
+  if (d.video_url) {
+    const ytId = extractYoutubeId(d.video_url);
+    if (ytId) {
+      const thumb = document.querySelector('#videoWrapper > img');
+      if (thumb) thumb.src = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+      const btn = document.querySelector('.ekit-video-popup');
+      if (btn) btn.href = `https://www.youtube.com/embed/${ytId}?autoplay=1`;
+    }
+  }
+}
+
+function injectBerita(items) {
+  if (!items || items.length === 0) return;
+  const container = document.querySelector('#rt-tpg-container-1641764275 .rt-content-loader .grid-layout-wrapper');
+  if (!container) return;
+
+  items.forEach(item => {
+    const col = document.createElement('div');
+    col.className = 'rt-col-md-4 default rt-grid-item';
+    col.innerHTML = `
+      <div class="rt-holder tpg-post-holder">
+        <div class="rt-img-holder">
+          <a href="${esc(item.link)}">
+            <img src="${esc(item.gambar_url)}" alt="${esc(item.judul)}"
+                 onerror="this.src='https://via.placeholder.com/400x200/003d7a/ffffff?text=Berita'">
+          </a>
+        </div>
+        <div class="post-right-content">
+          <div class="entry-title-wrapper">
+            <div class="tpg-separate-category">
+              <span class="categories-links"><a href="/berita-artikel/">${esc(item.kategori)}</a></span>
+            </div>
+            <h3 class="entry-title"><a href="${esc(item.link)}">${esc(item.judul)}</a></h3>
+          </div>
+          <div class="post-meta-tags"><i class="far fa-calendar-alt"></i> ${esc(item.tanggal)}</div>
+          ${item.excerpt ? `<div class="tpg-excerpt">${esc(item.excerpt)}</div>` : ''}
+          <div class="post-footer"><div class="read-more"><a href="${esc(item.link)}">Baca Selengkapnya</a></div></div>
+        </div>
+      </div>
+    `;
+    container.insertBefore(col, container.firstChild);
+  });
+}
+
+// Video popup handler
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('videoPlayBtn');
+  const wrapper = document.getElementById('videoWrapper');
+  if (btn && wrapper) {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const src = btn.href + (btn.href.includes('?') ? '&' : '?') + 'autoplay=1';
+      wrapper.innerHTML = `<iframe src="${src}" allow="autoplay;fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:none;"></iframe>`;
+    });
+  }
+
+  // Hamburger toggle
+  const ham = document.getElementById('hamburger');
+  const nav = document.getElementById('navMenu');
+  if (ham && nav) {
+    ham.addEventListener('click', () => nav.classList.toggle('open'));
+  }
+});
+
+// Helpers
+function esc(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+}
+function extractYoutubeId(url) {
+  if (!url) return null;
+  for (const p of [/youtu\.be\/([^?&]+)/, /youtube\.com\/watch\?v=([^&]+)/, /youtube\.com\/embed\/([^?]+)/]) {
+    const m = url.match(p);
+    if (m) return m[1];
+  }
+  return null;
+}
+</script>
+
+</body>
+</html>
