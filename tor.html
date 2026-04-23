@@ -1,455 +1,390 @@
-import React, { useState } from 'react';
-import { 
-  Users, 
-  UserCheck, 
-  Briefcase, 
-  Settings, 
-  Clock, 
-  ShieldCheck, 
-  BookOpen, 
-  ChevronRight, 
-  Info, 
-  FileText, 
-  CreditCard, 
-  Megaphone, 
-  Layout, 
-  Headphones,
-  CheckCircle2,
-  AlertCircle
-} from 'lucide-react';
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIK-MKDU - Struktur & Layanan</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-slate-50">
+    <div id="root"></div>
 
-const App = () => {
-  const [activeTab, setActiveTab] = useState('struktur');
-  const [activeJobDesk, setActiveJobDesk] = useState('KABAG');
-
-  const jobDeskData = {
-    KABAG: {
-      name: "Dr. Ahmad Fatoni, Lc., M.Ag.",
-      title: "Kepala Bagian",
-      tor: ["Mengkoordinir pengembangan kurikulum & pembelajaran", "Mengkoordinir administrasi & pelaksanaan", "Mengelola keuangan, sarpras, SDM", "Menjalin kerjasama"],
-      harian: ["Persetujuan kebijakan", "Pengambilan keputusan strategis"],
-      mingguan: ["Evaluasi kegiatan pembelajaran"],
-      bulanan: ["Review sistem dan kebijakan"],
-      kasuistik: ["Konflik lintas unit", "Keputusan strategis mendesak"]
-    },
-    KAUR: {
-      name: "Imam Suharyadi I, S.Ap",
-      title: "Kepala Urusan",
-      tor: ["Membantu Kabag dalam operasional", "Mengkoordinir administrasi & pembelajaran", "Mengelola tugas harian staf"],
-      harian: ["Monitoring pelaksanaan pembelajaran", "Koordinasi staf dan SIE"],
-      mingguan: ["Evaluasi operasional", "Sinkronisasi antar bagian"],
-      bulanan: ["Laporan ke Kabag"],
-      kasuistik: ["Dosen tidak hadir", "Jadwal bentrok", "Komplain mahasiswa"]
-    },
-    SIE_ADMIN: {
-      name: "Munawir G., M.Ag (Reg) / Shofroni H., M.Ag (Non-Reg)",
-      title: "Administrasi & Pelayanan Pembelajaran",
-      tor: ["Menyusun jadwal pembelajaran", "Menyiapkan presensi", "Monitoring pelaksanaan", "Melayani dosen & mahasiswa"],
-      harian: ["Cek kelas berjalan", "Respon dosen/mahasiswa"],
-      mingguan: ["Monitoring kehadiran"],
-      bulanan: ["Evaluasi pembelajaran"],
-      kasuistik: ["Mahasiswa tidak mendapat kelas", "Nilai tidak muncul", "Kelas kosong"]
-    },
-    SIE_SEKRET: {
-      name: "Nazilatun K., S.Pd.I",
-      title: "Kesekretariatan & Dokumentasi",
-      tor: ["Mengelola surat masuk/keluar", "Arsip dokumen", "Notulensi rapat"],
-      harian: ["Proses surat", "Distribusi dokumen"],
-      mingguan: ["Penataan arsip"],
-      bulanan: ["Laporan administrasi"],
-      kasuistik: ["Surat mendadak", "Dokumen hilang"]
-    },
-    SIE_KEUANGAN: {
-      name: "Shovi Ummul Isnaini, M.Pd",
-      title: "Keuangan & Rumah Tangga",
-      tor: ["Mengelola dana internal & eksternal", "Pencatatan keuangan", "Kebutuhan operasional"],
-      harian: ["Pencatatan pengeluaran"],
-      mingguan: ["Kontrol penggunaan dana"],
-      bulanan: ["Laporan keuangan"],
-      kasuistik: ["Kebutuhan mendadak", "Keterlambatan dana"]
-    },
-    SIE_PUBLIKASI: {
-      name: "Anny S., S.Pd.I / M. Taqiuddin Akram, S.Pd.",
-      title: "Publikasi & Sumber Belajar",
-      tor: ["Publikasi kegiatan AIK", "Pengelolaan media online", "Penyediaan sumber belajar"],
-      harian: ["Update informasi"],
-      mingguan: ["Produksi konten"],
-      bulanan: ["Evaluasi media"],
-      kasuistik: ["Informasi mendadak", "Koreksi publikasi"]
-    },
-    SIE_SARPRAS: {
-      name: "Suryo, S.Pd",
-      title: "Sarana Prasarana",
-      tor: ["Menyediakan ruang & fasilitas", "Mengelola inventaris"],
-      harian: ["Cek kesiapan ruang"],
-      mingguan: ["Perawatan fasilitas"],
-      bulanan: ["Inventarisasi"],
-      kasuistik: ["Alat rusak", "Ruang tidak siap"]
-    }
-  };
-
-  const navItems = [
-    { id: 'struktur', label: 'Struktur Organisasi', icon: Users },
-    { id: 'jobdesk', label: 'Job Description', icon: Briefcase },
-    { id: 'layanan', label: 'Sistem Layanan', icon: Headphones },
-    { id: 'slq', label: 'Instruktur SLQ', icon: BookOpen },
-  ];
-
-  return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans">
-      {/* Header */}
-      <header className="bg-emerald-700 text-white p-8 shadow-lg">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">AIK dan MKWK</h1>
-            <p className="text-emerald-100 mt-2 opacity-90 flex items-center gap-2">
-              <ShieldCheck size={18} /> Dokumentasi Operasional Resmi (ToR)
-            </p>
-          </div>
-          <div className="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20">
-            <p className="text-xs uppercase tracking-widest font-semibold opacity-70">Prinsip Utama</p>
-            <p className="text-sm italic italic">"Informatif, Memuaskan, Terstruktur, Efisien"</p>
-          </div>
-        </div>
-      </header>
-
-      {/* Navigation */}
-      <nav className="bg-white sticky top-0 z-10 border-b border-slate-200 shadow-sm">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex overflow-x-auto no-scrollbar py-2">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setActiveTab(item.id)}
-                className={`flex items-center gap-2 px-6 py-3 text-sm font-medium transition-all whitespace-nowrap rounded-lg ${
-                  activeTab === item.id 
-                    ? 'text-emerald-700 bg-emerald-50' 
-                    : 'text-slate-500 hover:text-emerald-600 hover:bg-slate-50'
-                }`}
-              >
-                <item.icon size={18} />
-                {item.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      </nav>
-
-      <main className="max-w-6xl mx-auto p-6 md:p-10">
-        
-        {/* TAB: STRUKTUR */}
-        {activeTab === 'struktur' && (
-          <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="text-center max-w-2xl mx-auto mb-10">
-              <h2 className="text-2xl font-bold text-slate-900">Hierarki Organisasi</h2>
-              <p className="text-slate-500 mt-2">Struktur pembagian tanggung jawab berdasarkan peran strategis dan operasional.</p>
-            </div>
-
-            <div className="flex flex-col items-center gap-8">
-              {/* Level 1: Pimpinan */}
-              <div className="bg-emerald-600 text-white p-6 rounded-2xl shadow-xl w-full max-w-sm text-center transform hover:scale-105 transition-transform">
-                <p className="text-xs font-bold uppercase opacity-80 mb-1">Kepala Bagian (KABAG)</p>
-                <h3 className="text-xl font-bold">Dr. Ahmad Fatoni, Lc., M.Ag.</h3>
-                <p className="text-xs mt-2 opacity-90">Koordinator Seluruh Pengembangan & Administrasi</p>
-              </div>
-
-              <ChevronRight className="rotate-90 text-slate-300" />
-
-              {/* Level 2: KAUR */}
-              <div className="bg-white border-2 border-emerald-600 p-5 rounded-2xl shadow-lg w-full max-w-xs text-center border-dashed">
-                <p className="text-xs font-bold uppercase text-emerald-600 mb-1">Kepala Urusan (KAUR)</p>
-                <h3 className="text-lg font-bold text-slate-800">Imam Suharyadi I, S.Ap</h3>
-                <p className="text-xs text-slate-500 mt-2">Pelaksana & Pengendali Layanan</p>
-              </div>
-
-              <div className="h-8 w-1 bg-slate-200"></div>
-
-              {/* Level 3: SIE & Layer Layanan */}
-              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
-                {Object.keys(jobDeskData).filter(key => key.startsWith('SIE')).map((key) => (
-                  <div key={key} className="bg-white p-4 rounded-xl shadow border border-slate-100 hover:shadow-md transition-shadow flex flex-col items-center text-center">
-                    <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-700 mb-3">
-                      {key === 'SIE_ADMIN' && <Layout size={20} />}
-                      {key === 'SIE_SEKRET' && <FileText size={20} />}
-                      {key === 'SIE_KEUANGAN' && <CreditCard size={20} />}
-                      {key === 'SIE_PUBLIKASI' && <Megaphone size={20} />}
-                      {key === 'SIE_SARPRAS' && <Settings size={20} />}
-                    </div>
-                    <h4 className="text-[13px] font-bold text-slate-800 leading-tight mb-2 h-10 flex items-center">
-                      {jobDeskData[key].title}
-                    </h4>
-                    <p className="text-[11px] text-slate-500 font-medium bg-slate-50 w-full py-2 rounded">
-                      {jobDeskData[key].name}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              {/* FO Layer */}
-              <div className="mt-8 bg-blue-50 border border-blue-100 p-4 rounded-2xl w-full max-w-md">
-                <div className="flex items-center gap-3">
-                  <div className="p-3 bg-blue-500 text-white rounded-xl shadow-lg">
-                    <Headphones size={24} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-blue-900 leading-none">Front Office (Layer Layanan)</h4>
-                    <p className="text-sm text-blue-700 mt-1">Part-timer (Shift Pagi & Siang)</p>
-                  </div>
-                </div>
-                <p className="text-xs mt-3 text-blue-600 italic">"Garis depan pelayanan, penyaring informasi awal."</p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* TAB: JOBDESK */}
-        {activeTab === 'jobdesk' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 animate-in fade-in duration-500">
-            {/* Sidebar Picker */}
-            <div className="lg:col-span-4 space-y-2">
-              <h3 className="text-lg font-bold px-4 mb-4">Pilih Jabatan</h3>
-              {Object.entries(jobDeskData).map(([key, data]) => (
-                <button
-                  key={key}
-                  onClick={() => setActiveJobDesk(key)}
-                  className={`w-full text-left px-4 py-4 rounded-xl transition-all flex items-center justify-between group ${
-                    activeJobDesk === key 
-                      ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-200' 
-                      : 'bg-white text-slate-600 hover:bg-emerald-50 border border-slate-100'
-                  }`}
+    <script type="text/babel">
+        // Helper untuk Icon SVG agar tidak bergantung pada library eksternal yang sering error di CDN
+        const Icon = ({ name, size = 20, className = "" }) => {
+            const icons = {
+                users: <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>,
+                briefcase: <rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>,
+                settings: <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>,
+                clock: <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>,
+                shield: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>,
+                book: <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>,
+                chevronRight: <polyline points="9 18 15 12 9 6"/>,
+                info: <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>,
+                fileText: <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>,
+                creditCard: <rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>,
+                megaphone: <path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>,
+                layout: <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>,
+                headphones: <path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>,
+                check: <polyline points="20 6 9 17 4 12"/>,
+                alert: <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            };
+            return (
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    width={size} 
+                    height={size} 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    className={className}
                 >
-                  <div>
-                    <p className={`text-[10px] uppercase font-bold tracking-wider ${activeJobDesk === key ? 'text-emerald-100' : 'text-emerald-600'}`}>
-                      {key.replace('_', ' ')}
-                    </p>
-                    <p className="font-bold text-sm truncate">{data.title}</p>
-                  </div>
-                  <ChevronRight size={16} className={`${activeJobDesk === key ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 transition-opacity'}`} />
-                </button>
-              ))}
-            </div>
+                    {icons[name] || null}
+                </svg>
+            );
+        };
 
-            {/* Content Detail */}
-            <div className="lg:col-span-8 bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-100">
-              <div className="border-b border-slate-100 pb-6 mb-6">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h2 className="text-2xl font-bold text-slate-900">{jobDeskData[activeJobDesk].name}</h2>
-                    <p className="text-emerald-600 font-semibold">{jobDeskData[activeJobDesk].title}</p>
-                  </div>
-                  <div className="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tight">
-                    ToR Verified
-                  </div>
+        const App = () => {
+            const [activeTab, setActiveTab] = useState('struktur');
+            const [activeJobDesk, setActiveJobDesk] = useState('KABAG');
+
+            const jobDeskData = {
+                KABAG: {
+                    name: "Dr. Ahmad Fatoni, Lc., M.Ag.",
+                    title: "Kepala Bagian",
+                    tor: ["Mengkoordinir pengembangan kurikulum & pembelajaran", "Mengkoordinir administrasi & pelaksanaan", "Mengelola keuangan, sarpras, SDM", "Menjalin kerjasama"],
+                    harian: ["Persetujuan kebijakan", "Pengambilan keputusan strategis"],
+                    mingguan: ["Evaluasi kegiatan pembelajaran"],
+                    bulanan: ["Review sistem dan kebijakan"],
+                    kasuistik: ["Konflik lintas unit", "Keputusan strategis mendesak"]
+                },
+                KAUR: {
+                    name: "Imam Suharyadi I, S.Ap",
+                    title: "Kepala Urusan",
+                    tor: ["Membantu Kabag dalam operasional", "Mengkoordinir administrasi & pembelajaran", "Mengelola tugas harian staf"],
+                    harian: ["Monitoring pelaksanaan pembelajaran", "Koordinasi staf dan SIE"],
+                    mingguan: ["Evaluasi operasional", "Sinkronisasi antar bagian"],
+                    bulanan: ["Laporan ke Kabag"],
+                    kasuistik: ["Dosen tidak hadir", "Jadwal bentrok", "Komplain mahasiswa"]
+                },
+                SIE_ADMIN: {
+                    name: "Munawir G., M.Ag (Reg) / Shofroni H., M.Ag (Non-Reg)",
+                    title: "Administrasi & Pelayanan Pembelajaran",
+                    tor: ["Menyusun jadwal pembelajaran", "Menyiapkan presensi", "Monitoring pelaksanaan", "Melayani dosen & mahasiswa"],
+                    harian: ["Cek kelas berjalan", "Respon dosen/mahasiswa"],
+                    mingguan: ["Monitoring kehadiran"],
+                    bulanan: ["Evaluasi pembelajaran"],
+                    kasuistik: ["Mahasiswa tidak mendapat kelas", "Nilai tidak muncul", "Kelas kosong"]
+                },
+                SIE_SEKRET: {
+                    name: "Nazilatun K., S.Pd.I",
+                    title: "Kesekretariatan & Dokumentasi",
+                    tor: ["Mengelola surat masuk/keluar", "Arsip dokumen", "Notulensi rapat"],
+                    harian: ["Proses surat", "Distribusi dokumen"],
+                    mingguan: ["Penataan arsip"],
+                    bulanan: ["Laporan administrasi"],
+                    kasuistik: ["Surat mendadak", "Dokumen hilang"]
+                },
+                SIE_KEUANGAN: {
+                    name: "Shovi Ummul Isnaini, M.Pd",
+                    title: "Keuangan & Rumah Tangga",
+                    tor: ["Mengelola dana internal & eksternal", "Pencatatan keuangan", "Kebutuhan operasional"],
+                    harian: ["Pencatatan pengeluaran"],
+                    mingguan: ["Kontrol penggunaan dana"],
+                    bulanan: ["Laporan keuangan"],
+                    kasuistik: ["Kebutuhan mendadak", "Keterlambatan dana"]
+                },
+                SIE_PUBLIKASI: {
+                    name: "Anny S., S.Pd.I / M. Taqiuddin Akram, S.Pd.",
+                    title: "Publikasi & Sumber Belajar",
+                    tor: ["Publikasi kegiatan AIK", "Pengelolaan media online", "Penyediaan sumber belajar"],
+                    harian: ["Update informasi"],
+                    mingguan: ["Produksi konten"],
+                    bulanan: ["Evaluasi media"],
+                    kasuistik: ["Informasi mendadak", "Koreksi publikasi"]
+                },
+                SIE_SARPRAS: {
+                    name: "Suryo, S.Pd",
+                    title: "Sarana Prasarana",
+                    tor: ["Menyediakan ruang & fasilitas", "Mengelola inventaris"],
+                    harian: ["Cek kesiapan ruang"],
+                    mingguan: ["Perawatan fasilitas"],
+                    bulanan: ["Inventarisasi"],
+                    kasuistik: ["Alat rusak", "Ruang tidak siap"]
+                }
+            };
+
+            const navItems = [
+                { id: 'struktur', label: 'Struktur Organisasi', icon: 'users' },
+                { id: 'jobdesk', label: 'Job Description', icon: 'briefcase' },
+                { id: 'layanan', label: 'Sistem Layanan', icon: 'headphones' },
+                { id: 'slq', label: 'Instruktur SLQ', icon: 'book' },
+            ];
+
+            return (
+                <div className="min-h-screen">
+                    {/* Header */}
+                    <header className="bg-emerald-700 text-white p-8 shadow-lg">
+                        <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div>
+                                <h1 className="text-3xl font-bold tracking-tight">AIK dan MKWK</h1>
+                                <p className="text-emerald-100 mt-2 opacity-90 flex items-center gap-2">
+                                    <Icon name="shield" size={18} /> Dokumentasi Operasional Resmi (ToR)
+                                </p>
+                            </div>
+                            <div className="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20">
+                                <p className="text-xs uppercase tracking-widest font-semibold opacity-70">Prinsip Utama</p>
+                                <p className="text-sm italic italic">"Informatif, Memuaskan, Terstruktur, Efisien"</p>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Navigation */}
+                    <nav className="bg-white sticky top-0 z-10 border-b border-slate-200 shadow-sm">
+                        <div className="max-w-6xl mx-auto px-4">
+                            <div className="flex overflow-x-auto no-scrollbar py-2">
+                                {navItems.map((item) => (
+                                    <button
+                                        key={item.id}
+                                        onClick={() => setActiveTab(item.id)}
+                                        className={`flex items-center gap-2 px-6 py-3 text-sm font-medium transition-all whitespace-nowrap rounded-lg ${
+                                            activeTab === item.id 
+                                                ? 'text-emerald-700 bg-emerald-50' 
+                                                : 'text-slate-500 hover:text-emerald-600 hover:bg-slate-50'
+                                        }`}
+                                    >
+                                        <Icon name={item.icon} size={18} />
+                                        {item.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </nav>
+
+                    <main className="max-w-6xl mx-auto p-6 md:p-10">
+                        {/* TAB: STRUKTUR */}
+                        {activeTab === 'struktur' && (
+                            <div className="space-y-8 fade-in">
+                                <div className="text-center max-w-2xl mx-auto mb-10">
+                                    <h2 className="text-2xl font-bold text-slate-900">Hierarki Organisasi</h2>
+                                    <p className="text-slate-500 mt-2">Struktur pembagian tanggung jawab berdasarkan peran strategis dan operasional.</p>
+                                </div>
+                                <div className="flex flex-col items-center gap-8">
+                                    <div className="bg-emerald-600 text-white p-6 rounded-2xl shadow-xl w-full max-w-sm text-center transform hover:scale-105 transition-transform">
+                                        <p className="text-xs font-bold uppercase opacity-80 mb-1">Kepala Bagian (KABAG)</p>
+                                        <h3 className="text-xl font-bold">{jobDeskData.KABAG.name}</h3>
+                                        <p className="text-xs mt-2 opacity-90">Koordinator Seluruh Pengembangan & Administrasi</p>
+                                    </div>
+                                    <Icon name="chevronRight" className="rotate-90 text-slate-300" />
+                                    <div className="bg-white border-2 border-emerald-600 p-5 rounded-2xl shadow-lg w-full max-w-xs text-center border-dashed">
+                                        <p className="text-xs font-bold uppercase text-emerald-600 mb-1">Kepala Urusan (KAUR)</p>
+                                        <h3 className="text-lg font-bold text-slate-800">{jobDeskData.KAUR.name}</h3>
+                                        <p className="text-xs text-slate-500 mt-2">Pelaksana & Pengendali Layanan</p>
+                                    </div>
+                                    <div className="h-8 w-1 bg-slate-200"></div>
+                                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
+                                        {Object.keys(jobDeskData).filter(key => key.startsWith('SIE')).map((key) => (
+                                            <div key={key} className="bg-white p-4 rounded-xl shadow border border-slate-100 hover:shadow-md transition-shadow flex flex-col items-center text-center">
+                                                <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-700 mb-3">
+                                                    {key === 'SIE_ADMIN' && <Icon name="layout" size={20} />}
+                                                    {key === 'SIE_SEKRET' && <Icon name="fileText" size={20} />}
+                                                    {key === 'SIE_KEUANGAN' && <Icon name="creditCard" size={20} />}
+                                                    {key === 'SIE_PUBLIKASI' && <Icon name="megaphone" size={20} />}
+                                                    {key === 'SIE_SARPRAS' && <Icon name="settings" size={20} />}
+                                                </div>
+                                                <h4 className="text-[13px] font-bold text-slate-800 leading-tight mb-2 h-10 flex items-center">
+                                                    {jobDeskData[key].title}
+                                                </h4>
+                                                <p className="text-[11px] text-slate-500 font-medium bg-slate-50 w-full py-2 rounded">
+                                                    {jobDeskData[key].name.split('/')[0]}
+                                                </p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="mt-8 bg-blue-50 border border-blue-100 p-4 rounded-2xl w-full max-w-md">
+                                        <div className="flex items-center gap-3">
+                                            <div className="p-3 bg-blue-500 text-white rounded-xl shadow-lg">
+                                                <Icon name="headphones" size={24} />
+                                            </div>
+                                            <div>
+                                                <h4 className="font-bold text-blue-900 leading-none text-sm">Front Office (Layer Layanan)</h4>
+                                                <p className="text-xs text-blue-700 mt-1">Part-timer (Shift Pagi & Siang)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* TAB: JOBDESK */}
+                        {activeTab === 'jobdesk' && (
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 fade-in">
+                                <div className="lg:col-span-4 space-y-2">
+                                    <h3 className="text-lg font-bold px-4 mb-4 text-slate-900">Pilih Jabatan</h3>
+                                    {Object.entries(jobDeskData).map(([key, data]) => (
+                                        <button
+                                            key={key}
+                                            onClick={() => setActiveJobDesk(key)}
+                                            className={`w-full text-left px-4 py-4 rounded-xl transition-all flex items-center justify-between group ${
+                                                activeJobDesk === key 
+                                                    ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-200' 
+                                                    : 'bg-white text-slate-600 hover:bg-emerald-50 border border-slate-100'
+                                            }`}
+                                        >
+                                            <div>
+                                                <p className={`text-[10px] uppercase font-bold tracking-wider ${activeJobDesk === key ? 'text-emerald-100' : 'text-emerald-600'}`}>
+                                                    {key.replace('_', ' ')}
+                                                </p>
+                                                <p className="font-bold text-sm truncate">{data.title}</p>
+                                            </div>
+                                            <Icon name="chevronRight" size={16} className={activeJobDesk === key ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} />
+                                        </button>
+                                    ))}
+                                </div>
+                                <div className="lg:col-span-8 bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-100">
+                                    <div className="border-b border-slate-100 pb-6 mb-6">
+                                        <h2 className="text-2xl font-bold text-slate-900">{jobDeskData[activeJobDesk].name}</h2>
+                                        <p className="text-emerald-600 font-semibold">{jobDeskData[activeJobDesk].title}</p>
+                                    </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                        <div className="space-y-6">
+                                            <section>
+                                                <div className="flex items-center gap-2 text-slate-900 font-bold mb-3">
+                                                    <Icon name="fileText" size={16} className="text-slate-400" /> Tugas Utama (ToR)
+                                                </div>
+                                                <ul className="space-y-2">
+                                                    {jobDeskData[activeJobDesk].tor.map((item, i) => (
+                                                        <li key={i} className="flex gap-2 text-sm text-slate-600">
+                                                            <Icon name="check" size={16} className="text-emerald-500 mt-0.5 shrink-0" /> {item}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </section>
+                                            <section className="bg-amber-50/50 p-4 rounded-2xl border border-amber-100">
+                                                <div className="flex items-center gap-2 text-amber-900 font-bold mb-3 text-sm">
+                                                    <Icon name="alert" size={16}/> Kasus Khusus
+                                                </div>
+                                                <ul className="space-y-2">
+                                                    {jobDeskData[activeJobDesk].kasuistik.map((item, i) => (
+                                                        <li key={i} className="text-xs text-amber-800 flex items-center gap-2">
+                                                            <span className="w-1 h-1 bg-amber-400 rounded-full shrink-0"></span> {item}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </section>
+                                        </div>
+                                        <div className="space-y-4">
+                                            <div className="flex items-center gap-2 text-slate-900 font-bold mb-1">
+                                                <Icon name="clock" size={16} className="text-slate-400" /> Timeline Kerja
+                                            </div>
+                                            <div className="space-y-3">
+                                                {['harian', 'mingguan', 'bulanan'].map(period => (
+                                                    <div key={period} className="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{period}</p>
+                                                        <p className="text-sm text-slate-700 font-medium">{jobDeskData[activeJobDesk][period].join(", ")}</p>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* TAB: LAYANAN */}
+                        {activeTab === 'layanan' && (
+                            <div className="space-y-12 fade-in">
+                                <div className="text-center max-w-2xl mx-auto">
+                                    <h2 className="text-2xl font-bold text-slate-900">Alur Sistem Layanan</h2>
+                                    <p className="text-slate-500 mt-2">Mekanisme penanganan permintaan koordinasi internal AIK-MKDU.</p>
+                                </div>
+                                <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                                    {[
+                                        { step: "01", title: "Front Office", icon: "headphones", desc: "Penerima layanan awal & penyaring pertanyaan umum." },
+                                        { step: "02", title: "Filtering", icon: "info", desc: "Selesai di FO atau diteruskan ke SIE terkait." },
+                                        { step: "03", title: "SIE Bidang", icon: "settings", desc: "Penanganan teknis oleh seksi sesuai kebutuhan." },
+                                        { step: "04", title: "Koordinasi", icon: "users", desc: "KAUR memantau & mengarahkan hambatan." },
+                                        { step: "05", title: "Kebijakan", icon: "shield", desc: "Diarahkan ke Kabag jika bersifat strategis." },
+                                    ].map((item, idx) => (
+                                        <div key={idx} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
+                                            <div className="w-12 h-12 bg-emerald-600 text-white rounded-xl flex items-center justify-center mb-4 shadow-md">
+                                                <Icon name={item.icon} size={24} />
+                                            </div>
+                                            <p className="text-[10px] font-bold text-emerald-600 uppercase mb-1">Step {item.step}</p>
+                                            <h4 className="font-bold text-slate-900 text-sm mb-2">{item.title}</h4>
+                                            <p className="text-[11px] text-slate-500">{item.desc}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* TAB: SLQ */}
+                        {activeTab === 'slq' && (
+                            <div className="space-y-8 fade-in">
+                                <div className="bg-gradient-to-br from-indigo-900 to-emerald-900 text-white rounded-3xl p-8 md:p-12 shadow-2xl">
+                                    <div className="max-w-2xl">
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <Icon name="book" size={32} className="text-emerald-400" />
+                                            <h2 className="text-3xl font-bold text-white">Instruktur SLQ</h2>
+                                        </div>
+                                        <p className="text-lg text-emerald-100 opacity-90 leading-relaxed mb-8">
+                                            Seluruh staf SIE memiliki peran tambahan strategis sebagai <span className="font-bold underline underline-offset-4">Pengajar SLQ</span>.
+                                        </p>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            <div className="space-y-4">
+                                                <h4 className="text-sm font-bold uppercase text-emerald-400 tracking-widest">Ketentuan</h4>
+                                                <ul className="space-y-2 text-sm text-white/80">
+                                                    <li>• Di luar jam kerja utama</li>
+                                                    <li>• Tidak mengganggu layanan</li>
+                                                    <li>• Penugasan Terjadwal</li>
+                                                </ul>
+                                            </div>
+                                            <div className="space-y-4">
+                                                <h4 className="text-sm font-bold uppercase text-emerald-400 tracking-widest">Aktivitas</h4>
+                                                <ul className="space-y-2 text-sm text-white/80">
+                                                    <li>• Mengajar Harian</li>
+                                                    <li>• Koordinasi Mingguan</li>
+                                                    <li>• Evaluasi Bulanan</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </main>
+
+                    <footer className="bg-slate-900 text-slate-400 py-10 px-6 mt-12 border-t border-slate-800 text-center">
+                        <div className="max-w-6xl mx-auto">
+                            <h4 className="text-white font-bold mb-1">AIK-MKWK Excellence</h4>
+                            <p className="text-[10px] uppercase tracking-widest">© 2024 • Penyesuaian Operasional ToR Resmi</p>
+                        </div>
+                    </footer>
                 </div>
-              </div>
+            );
+        };
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Column 1: Core Tasks */}
-                <div className="space-y-6">
-                  <section>
-                    <div className="flex items-center gap-2 text-slate-900 font-bold mb-3">
-                      <div className="p-1.5 bg-slate-100 rounded-lg"><FileText size={16}/></div>
-                      Tugas Utama (ToR)
-                    </div>
-                    <ul className="space-y-2">
-                      {jobDeskData[activeJobDesk].tor.map((item, i) => (
-                        <li key={i} className="flex gap-2 text-sm text-slate-600">
-                          <CheckCircle2 size={16} className="text-emerald-500 mt-0.5 shrink-0" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </section>
-
-                  <section className="bg-amber-50/50 p-4 rounded-2xl border border-amber-100">
-                    <div className="flex items-center gap-2 text-amber-900 font-bold mb-3">
-                      <div className="p-1.5 bg-amber-100 rounded-lg"><AlertCircle size={16}/></div>
-                      Kasus Khusus (Kasuistik)
-                    </div>
-                    <ul className="space-y-2">
-                      {jobDeskData[activeJobDesk].kasuistik.map((item, i) => (
-                        <li key={i} className="text-sm text-amber-800 flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 bg-amber-400 rounded-full"></span>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </section>
-                </div>
-
-                {/* Column 2: Timeline Tasks */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 text-slate-900 font-bold mb-1">
-                    <div className="p-1.5 bg-slate-100 rounded-lg"><Clock size={16}/></div>
-                    Timeline Kerja
-                  </div>
-                  
-                  <div className="space-y-3">
-                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 hover:bg-white transition-colors">
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Harian</p>
-                      <p className="text-sm text-slate-700 font-medium">{jobDeskData[activeJobDesk].harian.join(", ")}</p>
-                    </div>
-                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 hover:bg-white transition-colors">
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Mingguan</p>
-                      <p className="text-sm text-slate-700 font-medium">{jobDeskData[activeJobDesk].mingguan.join(", ")}</p>
-                    </div>
-                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 hover:bg-white transition-colors">
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Bulanan</p>
-                      <p className="text-sm text-slate-700 font-medium">{jobDeskData[activeJobDesk].bulanan.join(", ")}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* TAB: LAYANAN */}
-        {activeTab === 'layanan' && (
-          <div className="space-y-12 animate-in fade-in duration-500">
-            <div className="text-center max-w-2xl mx-auto">
-              <h2 className="text-2xl font-bold text-slate-900">Alur Sistem Layanan</h2>
-              <p className="text-slate-500 mt-2">Mekanisme penanganan permintaan dan koordinasi internal AIK-MKDU.</p>
-            </div>
-
-            <div className="relative">
-              {/* Flow Path */}
-              <div className="hidden lg:block absolute top-1/2 left-0 w-full h-1 bg-emerald-100 -translate-y-1/2 z-0"></div>
-              
-              <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 relative z-10">
-                {[
-                  { step: "01", title: "Front Office", desc: "Menerima layanan awal dan menyaring pertanyaan umum.", icon: Headphones },
-                  { step: "02", title: "Filtering", desc: "Jawaban umum diselesaikan di FO. Sisanya diteruskan.", icon: Info },
-                  { step: "03", title: "SIE Bidang", desc: "Penanganan teknis oleh seksi sesuai kebutuhan layanan.", icon: Settings },
-                  { step: "04", title: "Koordinasi", desc: "KAUR memantau dan mengarahkan jika terjadi hambatan.", icon: UserCheck },
-                  { step: "05", title: "Kebijakan", desc: "Jika menyangkut keputusan strategis, diarahkan ke Kabag.", icon: ShieldCheck },
-                ].map((item, idx) => (
-                  <div key={idx} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center text-center transform hover:-translate-y-1 transition-transform">
-                    <div className="w-12 h-12 bg-emerald-600 text-white rounded-xl flex items-center justify-center mb-4 shadow-lg">
-                      <item.icon size={24} />
-                    </div>
-                    <p className="text-xs font-bold text-emerald-600 uppercase mb-1">Step {item.step}</p>
-                    <h4 className="font-bold text-slate-900 mb-2">{item.title}</h4>
-                    <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-emerald-900 text-white rounded-3xl p-8 flex flex-col md:flex-row items-center gap-8">
-              <div className="flex-1 space-y-4">
-                <h3 className="text-xl font-bold italic">"Komitmen Layanan"</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="flex items-center gap-3 bg-white/10 p-3 rounded-xl border border-white/10">
-                    <CheckCircle2 size={20} className="text-emerald-400" />
-                    <span className="text-sm font-medium">Monitoring Berkala</span>
-                  </div>
-                  <div className="flex items-center gap-3 bg-white/10 p-3 rounded-xl border border-white/10">
-                    <CheckCircle2 size={20} className="text-emerald-400" />
-                    <span className="text-sm font-medium">Controlling Terukur</span>
-                  </div>
-                  <div className="flex items-center gap-3 bg-white/10 p-3 rounded-xl border border-white/10">
-                    <CheckCircle2 size={20} className="text-emerald-400" />
-                    <span className="text-sm font-medium">Pelayanan Informatif</span>
-                  </div>
-                  <div className="flex items-center gap-3 bg-white/10 p-3 rounded-xl border border-white/10">
-                    <CheckCircle2 size={20} className="text-emerald-400" />
-                    <span className="text-sm font-medium">Kepuasan Pengguna</span>
-                  </div>
-                </div>
-              </div>
-              <div className="hidden md:block w-32 h-32 bg-emerald-500 rounded-full blur-3xl opacity-20"></div>
-            </div>
-          </div>
-        )}
-
-        {/* TAB: SLQ */}
-        {activeTab === 'slq' && (
-          <div className="animate-in fade-in duration-500 space-y-8">
-            <div className="bg-gradient-to-br from-indigo-900 to-emerald-900 text-white rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-2xl">
-              <div className="relative z-10 max-w-2xl">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 bg-white/20 rounded-2xl backdrop-blur-md">
-                    <BookOpen size={32} />
-                  </div>
-                  <h2 className="text-3xl font-bold">Instruktur SLQ</h2>
-                </div>
-                <p className="text-lg text-emerald-100 opacity-90 leading-relaxed mb-8">
-                  Seluruh staf SIE memiliki peran tambahan strategis sebagai <span className="font-bold underline underline-offset-4">Pengajar SLQ</span> sesuai kompetensi SDM.
-                </p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-4">
-                    <h4 className="text-sm font-bold uppercase text-emerald-400 tracking-widest flex items-center gap-2">
-                      <ShieldCheck size={14} /> Ketentuan Utama
-                    </h4>
-                    <ul className="space-y-3">
-                      <li className="flex items-center gap-3 text-sm">
-                        <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-                        Dilaksanakan di luar jam kerja
-                      </li>
-                      <li className="flex items-center gap-3 text-sm">
-                        <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-                        Tidak mengganggu layanan utama
-                      </li>
-                      <li className="flex items-center gap-3 text-sm">
-                        <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-                        Sistem Penugasan Terjadwal
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="space-y-4">
-                    <h4 className="text-sm font-bold uppercase text-emerald-400 tracking-widest flex items-center gap-2">
-                      <Clock size={14} /> Aktivitas Rutin
-                    </h4>
-                    <ul className="space-y-3">
-                      <li className="flex items-center gap-3 text-sm">
-                        <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-                        Mengajar Harian (Sesuai Jadwal)
-                      </li>
-                      <li className="flex items-center gap-3 text-sm">
-                        <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-                        Koordinasi Pengajar Mingguan
-                      </li>
-                      <li className="flex items-center gap-3 text-sm">
-                        <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-                        Evaluasi Peserta Bulanan
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Abstract Background Shapes */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
-              <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-[120px] translate-y-1/2 translate-x-1/2"></div>
-            </div>
-          </div>
-        )}
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-slate-900 text-slate-400 py-12 px-6 mt-12 border-t border-slate-800">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-center md:text-left">
-            <h4 className="text-white font-bold text-lg mb-1">AIK-MKWK Excellence</h4>
-            <p className="text-xs">Dokumen Operasional berbasis ToR Resmi • © 2024</p>
-          </div>
-          <div className="flex gap-4">
-            <div className="bg-slate-800 p-2 rounded-lg hover:text-white transition-colors cursor-pointer">
-              <Info size={20} />
-            </div>
-            <div className="bg-slate-800 p-2 rounded-lg hover:text-white transition-colors cursor-pointer">
-              <ShieldCheck size={20} />
-            </div>
-            <div className="bg-slate-800 p-2 rounded-lg hover:text-white transition-colors cursor-pointer">
-              <Settings size={20} />
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
-};
-
-export default App;
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
