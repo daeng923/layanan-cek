@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alur Pengawasan Ujian Kognitif AIK 2026</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        umm: {
+                            red: '#b91c1c', // Merah khas kampus
+                            dark: '#7f1d1d',
+                            light: '#fef2f2'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased selection:bg-umm-red selection:text-white pb-0 md:pb-12">
+
+    <!-- Responsive Container (Mobile & Desktop) -->
+    <div class="max-w-md md:max-w-4xl lg:max-w-5xl mx-auto bg-slate-50 min-h-screen md:min-h-fit relative shadow-2xl sm:border-x sm:border-slate-200 md:rounded-3xl md:mt-10 md:mb-10">
+        
+        <!-- Header Sticky (Relative on Desktop) -->
+        <header class="bg-umm-red text-white p-6 md:p-10 rounded-b-[2rem] md:rounded-t-3xl md:rounded-b-none shadow-lg sticky md:relative top-0 z-50 mb-8 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]">
+            <div class="flex justify-between items-start mb-2">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold leading-tight">Alur Pengawasan</h1>
+                    <h2 class="text-lg md:text-xl font-medium text-red-100 mt-1">Ujian Kognitif AIK 2026</h2>
+                </div>
+                <div class="bg-white/20 p-3 md:p-4 rounded-xl backdrop-blur-sm">
+                    <i data-lucide="shield-check" class="w-8 h-8 md:w-10 md:h-10 text-white"></i>
+                </div>
+            </div>
+            <div class="mt-4 md:mt-6 flex flex-wrap gap-2 md:gap-3 text-xs md:text-sm font-medium">
+                <span class="bg-umm-dark/50 px-3 md:px-4 py-1.5 md:py-2 rounded-full flex items-center gap-1.5 md:gap-2">
+                    <i data-lucide="laptop" class="w-3.5 h-3.5 md:w-4 md:h-4"></i> Laptop/HP
+                </span>
+                <span class="bg-umm-dark/50 px-3 md:px-4 py-1.5 md:py-2 rounded-full flex items-center gap-1.5 md:gap-2">
+                    <i data-lucide="wifi" class="w-3.5 h-3.5 md:w-4 md:h-4"></i> Jaringan Lokal
+                </span>
+                <span class="bg-umm-dark/50 px-3 md:px-4 py-1.5 md:py-2 rounded-full flex items-center gap-1.5 md:gap-2">
+                    <i data-lucide="list-checks" class="w-3.5 h-3.5 md:w-4 md:h-4"></i> Pilihan Ganda
+                </span>
+            </div>
+        </header>
+
+        <!-- Content/Timeline -->
+        <main class="px-5 md:px-10 pb-10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+
+            <!-- Step 1 -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 relative">
+                <div class="absolute -top-4 -left-2 bg-slate-800 text-white w-8 h-8 flex items-center justify-center rounded-xl font-bold shadow-md border-2 border-white">1</div>
+                <div class="ml-4">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
+                        <i data-lucide="clock" class="w-5 h-5 text-umm-red"></i> Sebelum Mahasiswa Masuk
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex gap-3 text-sm text-slate-600">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                            <span>Datang <strong>minimal 30 menit</strong> sebelum ujian.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-600">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                            <span>Pastikan jaringan lokal & akses SIMAK (<a href="https://simak.umm.ac.id" class="text-blue-600 underline">simak.umm.ac.id</a>) aktif.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-600">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                            <span>Siapkan daftar hadir dan denah tempat duduk.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 relative">
+                <div class="absolute -top-4 -left-2 bg-slate-800 text-white w-8 h-8 flex items-center justify-center rounded-xl font-bold shadow-md border-2 border-white">2</div>
+                <div class="ml-4">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
+                        <i data-lucide="users" class="w-5 h-5 text-umm-red"></i> Mahasiswa Masuk Ruangan
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex gap-3 text-sm text-slate-600">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                            <span>Periksa KSM (Kartu Studi Mahasiswa).</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-600">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                            <span>Arahkan mahasiswa duduk sesuai nomor urut.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-600">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                            <span>Pastikan mahasiswa memakai <strong>pakaian hitam putih</strong>, membawa KSM dan perangkat ujian.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 relative">
+                <div class="absolute -top-4 -left-2 bg-slate-800 text-white w-8 h-8 flex items-center justify-center rounded-xl font-bold shadow-md border-2 border-white">3</div>
+                <div class="ml-4">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
+                        <i data-lucide="log-in" class="w-5 h-5 text-umm-red"></i> Persiapan Login SIMAK
+                    </h3>
+                    <p class="text-sm font-medium text-slate-700 mb-2">Pandu mahasiswa:</p>
+                    <ul class="space-y-3">
+                        <li class="flex gap-3 text-sm text-slate-600">
+                            <span class="w-1.5 h-1.5 rounded-full bg-umm-red shrink-0 mt-1.5"></span>
+                            <span>Hubungkan perangkat ke jaringan lokal kampus (WiFi).</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-600">
+                            <span class="w-1.5 h-1.5 rounded-full bg-umm-red shrink-0 mt-1.5"></span>
+                            <span>Buka browser → akses <strong class="text-slate-800">https://simak.umm.ac.id</strong> → login akun masing-masing.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-600">
+                            <span class="w-1.5 h-1.5 rounded-full bg-umm-red shrink-0 mt-1.5"></span>
+                            <span>Pastikan sudah masuk ke halaman ujian yang benar.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 relative">
+                <div class="absolute -top-4 -left-2 bg-slate-800 text-white w-8 h-8 flex items-center justify-center rounded-xl font-bold shadow-md border-2 border-white">4</div>
+                <div class="ml-4">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
+                        <i data-lucide="mic" class="w-5 h-5 text-umm-red"></i> Instruksi Awal & Doa
+                    </h3>
+                    <p class="text-sm font-medium text-slate-700 mb-2">Berikan arahan:</p>
+                    <ul class="space-y-3">
+                        <li class="flex gap-3 text-sm text-slate-600">
+                            <span class="w-1.5 h-1.5 rounded-full bg-umm-red shrink-0 mt-1.5"></span>
+                            <span>Sampaikan lama ujian dan jumlah soal.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-600">
+                            <span class="w-1.5 h-1.5 rounded-full bg-umm-red shrink-0 mt-1.5"></span>
+                            <span><strong>Aturan ketertiban:</strong> Tidak membuka aplikasi lain, tab baru, tidak berbicara atau diskusi.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-600">
+                            <span class="w-1.5 h-1.5 rounded-full bg-umm-red shrink-0 mt-1.5"></span>
+                            <span>Pimpin doa bersama sebelum memulai ujian sesuai keyakinan masing-masing.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Step 5 (CRITICAL) -->
+            <div class="bg-white rounded-2xl p-5 shadow-md border-2 border-red-200 relative md:col-span-2">
+                <div class="absolute -top-4 -left-2 bg-umm-red text-white w-8 h-8 flex items-center justify-center rounded-xl font-bold shadow-md border-2 border-white animate-pulse">5</div>
+                <div class="ml-4 md:flex md:gap-8 md:items-stretch">
+                    <div class="md:w-1/2">
+                        <h3 class="text-lg font-bold text-umm-red mb-3 flex items-center gap-2">
+                            <i data-lucide="play-circle" class="w-5 h-5"></i> Mulai Ujian
+                        </h3>
+                        
+                        <ul class="space-y-3 mb-4">
+                            <li class="flex gap-3 text-sm text-slate-700">
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-umm-red shrink-0 mt-0.5"></i>
+                                <span>Berikan aba-aba: Klik <strong>“Mulai Ujian”</strong> di SIMAK.</span>
+                            </li>
+                        </ul>
+
+                        <p class="text-sm font-medium text-slate-700 mb-2 mt-4">Awasi aktif:</p>
+                        <ul class="space-y-2 mb-6 md:mb-0">
+                            <li class="flex gap-3 text-sm text-slate-600">
+                                <span class="w-1.5 h-1.5 rounded-full bg-umm-red shrink-0 mt-1.5"></span>
+                                <span>Keliling ruangan.</span>
+                            </li>
+                            <li class="flex gap-3 text-sm text-slate-600">
+                                <span class="w-1.5 h-1.5 rounded-full bg-umm-red shrink-0 mt-1.5"></span>
+                                <span>Cek aktivitas perangkat mahasiswa.</span>
+                            </li>
+                            <li class="flex gap-3 text-sm text-slate-600">
+                                <span class="w-1.5 h-1.5 rounded-full bg-umm-red shrink-0 mt-1.5"></span>
+                                <span>Catat pelanggaran/kendala di berita acara.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Important New Rule Alert Box -->
+                    <div class="bg-red-50 border-l-4 border-red-600 p-5 rounded-r-xl shadow-sm md:w-1/2 flex items-center md:h-auto">
+                        <div class="flex items-start gap-4">
+                            <i data-lucide="alert-triangle" class="w-7 h-7 text-red-600 shrink-0 mt-0.5"></i>
+                            <div>
+                                <h4 class="text-sm md:text-base font-bold text-red-800 mb-1">ATURAN INPUT TOKEN (Wajib)</h4>
+                                <p class="text-sm text-red-700 leading-relaxed">
+                                    Pengawas <strong>wajib menginputkan sendiri</strong> token akses kuis secara langsung pada perangkat mahasiswa (mahasiswa tidak diperkenankan mengetik/melihat token sendiri) agar token tidak bocor keluar.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 relative">
+                <div class="absolute -top-4 -left-2 bg-slate-800 text-white w-8 h-8 flex items-center justify-center rounded-xl font-bold shadow-md border-2 border-white">6</div>
+                <div class="ml-4">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
+                        <i data-lucide="check-square" class="w-5 h-5 text-umm-red"></i> Selesai Ujian
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex gap-3 text-sm text-slate-600">
+                            <span class="w-1.5 h-1.5 rounded-full bg-umm-red shrink-0 mt-1.5"></span>
+                            <span>Mahasiswa klik <strong>“Selesaikan kuis”</strong> → <strong>“Kumpulkan semua dan selesai”</strong> (klik 2x) setelah selesai.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-600">
+                            <span class="w-1.5 h-1.5 rounded-full bg-umm-red shrink-0 mt-1.5"></span>
+                            <span>Tetap di tempat sampai waktu habis atau pengawas mengizinkan keluar.</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 mt-3">
+                        <p class="text-xs font-bold text-slate-700 mb-2 uppercase tracking-wide">Setelah Ujian:</p>
+                        <ul class="space-y-2">
+                            <li class="flex gap-2 text-sm text-slate-600">
+                                <i data-lucide="arrow-right" class="w-4 h-4 text-slate-400 shrink-0 mt-0.5"></i>
+                                <span>Mahasiswa memastikan muncul keterangan: <em>“Selesai: memperoleh nilai”</em> & logout dari SIMAK.</span>
+                            </li>
+                            <li class="flex gap-2 text-sm text-slate-600">
+                                <i data-lucide="arrow-right" class="w-4 h-4 text-slate-400 shrink-0 mt-0.5"></i>
+                                <span>Mahasiswa keluar ruangan secara tertib.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 7 -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 relative">
+                <div class="absolute -top-4 -left-2 bg-slate-800 text-white w-8 h-8 flex items-center justify-center rounded-xl font-bold shadow-md border-2 border-white">7</div>
+                <div class="ml-4">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
+                        <i data-lucide="file-check-2" class="w-5 h-5 text-umm-red"></i> Setelah Ujian
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex gap-3 text-sm text-slate-600">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                            <span>Kumpulkan daftar hadir bertanda tangan.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-600">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                            <span>Isi berita acara ujian pada link yang sudah disediakan.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-600">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                            <span>Laporkan hasil ke koordinator ujian.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-8 text-center text-xs text-slate-400 pb-6 border-t border-slate-200 pt-6">
+            <p>AIK dan MKWK UMM &copy; 2026</p>
+            <p>Universitas Muhammadiyah Malang</p>
+        </footer>
+
+    </div>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+
+        // --- GEMINI API INTEGRATION ---
+        const apiKey = "";
+        
+        // 1. Exponential Backoff Retry Logic
+        async function fetchWithRetry(url, options, maxRetries = 5) {
+            const delays = [1000, 2000, 4000, 8000, 16000];
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    return await response.json();
+                } catch (error) {
+                    if (i === maxRetries - 1) throw error;
+                    await new Promise(res => setTimeout(res, delays[i]));
+                }
+            }
+        }
+
+        // 2. Call Gemini Text Generation
+        async function callGeminiAPI(prompt, systemInstruction) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: systemInstruction }] }
+            };
+            
+            try {
+                const result = await fetchWithRetry(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                return result.candidates?.[0]?.content?.parts?.[0]?.text || "Maaf, tidak dapat menghasilkan respons.";
+            } catch (err) {
+                return "Terjadi kesalahan jaringan atau API limit. Silakan coba lagi.";
+            }
+        }
+
+        // --- FITUR 1: GENERATOR BERITA ACARA ---
+        const baModal = document.getElementById('ba-modal');
+        const baInput = document.getElementById('ba-input');
+        const baResult = document.getElementById('ba-result');
+        const baResultContainer = document.getElementById('ba-result-container');
+        const baLoading = document.getElementById('ba-loading');
+        const btnGenerateBA = document.getElementById('btn-generate-ba');
+
+        function openBAModal() { baModal.classList.remove('hidden'); }
+        function closeBAModal() { baModal.classList.add('hidden'); }
+
+        async function generateBA() {
+            const note = baInput.value.trim();
+            if(!note) return;
+
+            btnGenerateBA.classList.add('hidden');
+            baLoading.classList.remove('hidden');
+            baResultContainer.classList.add('hidden');
+
+            const sysPrompt = "Anda adalah asisten administrasi resmi Universitas Muhammadiyah Malang. Tugas Anda merapikan catatan singkat dari pengawas ujian menjadi paragraf laporan Berita Acara Ujian yang sangat formal, rapi, baku, dan profesional berbahasa Indonesia. Tidak perlu membuat format surat, cukup 1-2 paragraf deskripsi kejadiannya saja. Jangan mengarang data tambahan.";
+            const prompt = `Ubah catatan ini menjadi bahasa Berita Acara yang formal: "${note}"`;
+
+            const aiText = await callGeminiAPI(prompt, sysPrompt);
+            
+            baResult.value = aiText.trim();
+            baLoading.classList.add('hidden');
+            btnGenerateBA.classList.remove('hidden');
+            baResultContainer.classList.remove('hidden');
+        }
+
+        function copyBA() {
+            baResult.select();
+            baResult.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+            const btn = document.getElementById('btn-copy-ba');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '✅ Tersalin!';
+            btn.classList.replace('bg-slate-800', 'bg-emerald-600');
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.classList.replace('bg-emerald-600', 'bg-slate-800');
+            }, 2000);
+        }
+
+        // --- FITUR 2: CHATBOT ASISTEN PENGAWAS ---
+        const chatWindow = document.getElementById('chat-window');
+        const chatHistory = document.getElementById('chat-history');
+        const chatInput = document.getElementById('chat-input');
+
+        function toggleChat() { chatWindow.classList.toggle('hidden'); }
+
+        function handleChatKey(e) { if(e.key === 'Enter') sendChatMessage(); }
+
+        function appendChat(msg, isUser) {
+            const div = document.createElement('div');
+            div.className = `p-3 rounded-xl shadow-sm border text-sm max-w-[85%] ${
+                isUser 
+                ? 'bg-purple-600 text-white rounded-tr-none self-end border-purple-700' 
+                : 'bg-white text-slate-700 rounded-tl-none self-start border-slate-100'
+            }`;
+            div.textContent = msg;
+            chatHistory.appendChild(div);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        async function sendChatMessage() {
+            const msg = chatInput.value.trim();
+            if(!msg) return;
+
+            appendChat(msg, true);
+            chatInput.value = '';
+            
+            // Tampilan Loading
+            const loadingId = 'loading-' + Date.now();
+            const loadingDiv = document.createElement('div');
+            loadingDiv.id = loadingId;
+            loadingDiv.className = "text-xs text-slate-400 self-start italic px-2";
+            loadingDiv.textContent = "✨ Berpikir...";
+            chatHistory.appendChild(loadingDiv);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+
+            const sysPrompt = "Anda adalah Asisten AI bagi Pengawas Ujian Kognitif AIK di Universitas Muhammadiyah Malang. Berikan solusi dan arahan kepada pengawas jika ada kendala ujian (jaringan mati, token bermasalah, indikasi kecurangan, mahasiswa sakit, dsb) secara sangat ringkas (maksimal 2 kalimat pendek), praktis, dan profesional.";
+            
+            const aiReply = await callGeminiAPI(msg, sysPrompt);
+            
+            document.getElementById(loadingId).remove();
+            appendChat(aiReply, false);
+        }
+    </script>
+</body>
+</html>
